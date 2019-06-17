@@ -271,3 +271,59 @@ class Farfetch():
             pass
         
         return product_details
+    
+    ################################################################################
+    # DATA CLEANING
+    ################################################################################
+    
+    # returns Pandas DataFrame of the utility matrix, unique users and unique in-stock items
+    def get_utility_matrix(self):
+        all_reviews     = list(self.review_collection.find( {}, {'_id': 0}))
+        all_products    = list(self.product_collection.find({}, {'_id': 0}))
+        stacked_reviews = []
+        
+        # create Pandas DataFrame of stacked reviews
+        for i in range(len(all_reviews)):
+            for j in range(len(all_reviews[i]['Pieces'])):
+                review           = {}
+                review['Entry']  = i + 1
+                review['User']   = all_reviews[i]['Reviewed by']
+                review['Item']   = all_reviews[i]['Pieces'][j]['Description']
+                review['URL']    = all_reviews[i]['Pieces'][j]['URL']
+                review['Rating'] = all_reviews[i]['Rating']
+                stacked_reviews.append(review)
+                
+        stacked_reviews = pd.DataFrame(stacked_reviews, columns=['User', 'Item', 'URL', 'Rating'])
+        
+        # create Pandas DataFrame of in-stock products
+        in_stock_products             = pd.DataFrame(all_products)
+        in_stock_products             = in_stock_products[in_stock_products['Out of Stock'] != True]
+        in_stock_products             = in_stock_products.drop(['Out of Stock'], axis=1)
+        
+        # drop null rows after filling on sale price and discount price
+        in_stock_products['On Sale']  = in_stock_products['On Sale'].fillna(in_stock_products['Original'])
+        in_stock_products['Discount'] = in_stock_products['Discount'].fillna('0% Off')
+        in_stock_products             = in_stock_products.dropna()
+        
+        # format original price, on sale price and discount percentage
+        in_stock_products['Original'] = [x.strip('$').replace(',', '') for x in in_stock_products['Original']]
+        in_stock_products['On Sale']  = [x.strip('$').replace(',', '') for x in in_stock_products['On Sale']]
+        in_stock_products['Discount'] = [x.strip('% Off') for x in in_stock_products['Discount']]
+        
+        in_stock_products['Original'] = in_stock_products['Original'].astype('int64')
+        in_stock_products['On Sale']  = in_stock_products['On Sale'].astype('int64')
+        in_stock_products['Discount'] = in_stock_products['Discount'].astype('int64')
+        
+        # merge stacked reviews and in-stock products into utility matrix
+        in_stock_reviews = stacked_reviews.merge(in_stock_products, on = 'URL')
+        unique_users     = in_stock_reviews[['User']].drop_duplicates()
+        unique_items     = in_stock_reviews.drop(['User', 'Rating'], axis=1).drop_duplicates()
+        utility_matrix   = in_stock_reviews[['User', 'URL', 'Rating']]
+        
+        # print description of data set
+        print('Total number of product ratings:   ' + str(len(stacked_reviews)))
+        print('Total number of in-stock ratings:  ' + str(len(in_stock_reviews)))
+        print('Total number of unique customers:  ' + str(len(unique_users)))
+        print('Total number of unique products:   ' + str(len(unique_items)))
+        
+        return utility_matrix, in_stock_reviews, unique_users, unique_items
