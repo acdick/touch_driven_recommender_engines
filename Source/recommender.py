@@ -85,3 +85,16 @@ class Recommender():
         ratings = self.dataframe[rating_column].value_counts()[self.recommender_history[-1]]
         
         return (self.recommender_history[-1], ratings)
+    
+    ################################################################################
+    # CONTENT-BASED
+    ################################################################################
+    
+    # content-based similarity with Pearson correlation
+    def content_based_similarity(self, rating_column):
+        
+        return self.recommender_history[-1]
+    
+    ################################################################################
+    # COLLABORATIVE FILTERING
+    ################################################################################
