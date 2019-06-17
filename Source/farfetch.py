@@ -15,7 +15,7 @@ class Farfetch():
         self.database           = self.client['farfetch']
         self.review_collection  = self.database['customer_reviews']
         self.product_collection = self.database['product_details']
-        self.recommender_system = self.init_recommender_system()
+        self.recommender_system = self.init_recommender_system('URL', 'Product', ['Designer', 'Category'])
         self.driver             = None
     
     ################################################################################
@@ -357,33 +357,51 @@ class Farfetch():
         
         return similarity_features, similarity_matrix
     
+    def load_content_similarity_matrix(self, file_path):
+        similarity_matrix = self.recommender_system.load_content_similarity_matrix(file_path)
+        
+        return similarity_matrix
+    
     ################################################################################
     # RECOMMENDER SYSTEM
     ################################################################################
     
-    def init_recommender_system(self):
+    def init_recommender_system(self, rating_column, descriptor, two_group_columns):
         utility_matrix, in_stock_reviews, users, items = self.get_utility_matrix()
-        self.recommender_system                        = Recommender(in_stock_reviews)
+        self.recommender_system                        = Recommender(in_stock_reviews, rating_column,
+                                                                     descriptor,       two_group_columns)
         
         return self.recommender_system
     
+    def update_last_rating(self, user_rating):
+        rated_item = self.recommender_system.update_user_rating(user_rating)
+        
+        return rated_item
+    
     def recommender_history(self):
-        return self.recommender_system.recommender_history
+        history = []
+        
+        for i in range(len(self.recommender_system.recommender_history)):
+            history.append((self.recommender_system.recommender_history[i],
+                            self.recommender_system.n_ratings_history[i],
+                            self.recommender_system.user_rating_history[i]))
+        
+        return history
     
     def most_rated(self):
-        return self.recommender_system.most_rated('URL')
+        return self.recommender_system.most_rated()
     
     def best_nine(self):
-        return self.recommender_system.best_nine('URL', ['Designer', 'Category'])
+        return self.recommender_system.best_nine()
     
     def best_nine_breadth(self):
-        return self.recommender_system.best_nine_breadth('URL', ['Designer', 'Category'])
+        return self.recommender_system.best_nine_breadth()
     
     def best_nine_depth(self):
-        return self.recommender_system.best_nine_depth('URL', ['Designer', 'Category'])
+        return self.recommender_system.best_nine_depth()
     
     def content_based_similarity(self):
-        return self.recommender_system.content_based_similarity('URL')
+        return self.recommender_system.content_based_similarity()
     
     ################################################################################
     # WEB DEMO
@@ -413,6 +431,9 @@ class Farfetch():
         elif len(self.recommender_history()) <= 6:
             print('Recommended by: Best Nine Depth')
             recommendation = self.best_nine_depth()
+        elif len(self.recommender_history()) <= 9:
+            print('Recommended by: Content-Based Pearson Similarity')
+            recommendation = self.content_based_similarity()
         else:
             print('Recommended by: Most Rated')
             recommendation = self.most_rated()
