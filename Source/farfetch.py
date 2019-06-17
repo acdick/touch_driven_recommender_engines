@@ -327,3 +327,32 @@ class Farfetch():
         print('Total number of unique products:   ' + str(len(unique_items)))
         
         return utility_matrix, in_stock_reviews, unique_users, unique_items
+    
+    ################################################################################
+    # FEATURE ENGINEERING
+    ################################################################################
+    
+    def product_similarity(self):
+        utility_matrix, in_stock_reviews, users, items = self.get_utility_matrix()
+        
+        # drop multicollinear columns and columns not used for similarity
+        similarity_features = items.drop(['Item', 'Style', 'Product', 'On Sale'], axis=1)
+        
+        # create similarity matrix with dummy categories for categorical variables
+        print(similarity_features.nunique())
+        similarity_features = similarity_features[['URL', 'Original', 'Discount', 'Gender', 'Made In', 'Category']]
+        similarity_features = similarity_features.set_index('URL')
+        similarity_matrix   = pd.get_dummies(similarity_features, columns=['Gender', 'Made In', 'Category'])
+        similarity_matrix   = similarity_matrix.T
+        
+        # MinMax scaler of continuous variables
+        # from sklearn.preprocessing   import MinMaxScaler
+        # scaler                        = MinMaxScaler()
+        # X_train[non_categorical_cols] = scaler.fit_transform(X_train[non_categorical_cols])
+        # X_test[non_categorical_cols]  = scaler.transform(    X_test[non_categorical_cols])
+        # X_train.head()
+        
+        # calculate correlation matrix
+        similarity_matrix   = similarity_matrix.corr(method='pearson')
+        
+        return similarity_features, similarity_matrix
