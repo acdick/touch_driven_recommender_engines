@@ -384,3 +384,77 @@ class Farfetch():
     
     def content_based_similarity(self):
         return self.recommender_system.content_based_similarity('URL')
+    
+    ################################################################################
+    # WEB DEMO
+    ################################################################################
+    
+    def start_demo(self):
+        self.driver = webdriver.Chrome('/Users/flatironschool/Downloads/chromedriver')
+        self.new_user()
+        
+        return None
+    
+    def new_user(self):
+        self.driver.get('https://www.farfetch.com')
+        self.recommender_system.clear_history()
+        
+        return None
+        
+    def next_recommendation(self):
+        recommendation = None
+        
+        if len(self.recommender_history()) == 0:
+            print('Recommended by: Most Rated')
+            recommendation = self.most_rated()
+        elif len(self.recommender_history()) <= 3:
+            print('Recommended by: Best Nine Breadth')
+            recommendation = self.best_nine_breadth()
+        elif len(self.recommender_history()) <= 6:
+            print('Recommended by: Best Nine Depth')
+            recommendation = self.best_nine_depth()
+        else:
+            print('Recommended by: Most Rated')
+            recommendation = self.most_rated()
+        
+        ## UPDATES
+        
+        # TASK 1
+        # recommender history
+        #    add number of reviews
+        #    add mean rating of current reviews
+        #    add current user rating
+        #    update running models
+        
+        # TASK 2
+        # update Mongo database
+        #    insert new review into database
+        #    use 'Flatiron' prefix
+        #    refresh all models
+        
+        # TASK 3
+        # live check if product is sold out
+        # if sold out:
+        #    pop from recommendation history
+        #    pop from product similarity matrix
+        #    retrain models
+        #    recursion call next recommendation
+        
+        # TASK 4
+        # create Dashboard and Flask Application
+        
+        # show web page of recommendation
+        self.driver.get(self.recommender_history()[-1])
+        
+        # live request of user rating
+        rating = input('Enter rating on 1 to 5 scale:\n')
+        print(rating)
+        
+        # insert user data into Mongo database
+        
+        return recommendation
+        
+    def end_demo(self):
+        self.driver.close()
+        
+        return None
