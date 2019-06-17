@@ -356,3 +356,31 @@ class Farfetch():
         similarity_matrix   = similarity_matrix.corr(method='pearson')
         
         return similarity_features, similarity_matrix
+    
+    ################################################################################
+    # RECOMMENDER SYSTEM
+    ################################################################################
+    
+    def init_recommender_system(self):
+        utility_matrix, in_stock_reviews, users, items = self.get_utility_matrix()
+        self.recommender_system                        = Recommender(in_stock_reviews)
+        
+        return self.recommender_system
+    
+    def recommender_history(self):
+        return self.recommender_system.recommender_history
+    
+    def most_rated(self):
+        return self.recommender_system.most_rated('URL')
+    
+    def best_nine(self):
+        return self.recommender_system.best_nine('URL', ['Designer', 'Category'])
+    
+    def best_nine_breadth(self):
+        return self.recommender_system.best_nine_breadth('URL', ['Designer', 'Category'])
+    
+    def best_nine_depth(self):
+        return self.recommender_system.best_nine_depth('URL', ['Designer', 'Category'])
+    
+    def content_based_similarity(self):
+        return self.recommender_system.content_based_similarity('URL')
