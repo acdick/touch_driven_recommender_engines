@@ -16,7 +16,7 @@ class Farfetch():
         self.review_collection  = self.database['customer_reviews']
         self.product_collection = self.database['product_details']
         self.recommender_system = self.init_recommender_system('URL',      'Product',
-                                                              ['Original', 'Discount'],
+                                                              ['Original', 'Discount', 'Gender', 'Made In'],
                                                               ['Designer', 'Category'])
         self.driver             = None
     
@@ -368,11 +368,11 @@ class Farfetch():
     # RECOMMENDER SYSTEM
     ################################################################################
     
-    def init_recommender_system(self, rating_column, descriptor, two_feature_columns, two_group_columns):
+    def init_recommender_system(self, rating_column, descriptor, four_feature_columns, two_group_columns):
         utility_matrix, in_stock_reviews, users, items = self.get_utility_matrix()
-        self.recommender_system                        = Recommender(utility_matrix,      in_stock_reviews,
-                                                                     rating_column,       descriptor,
-                                                                     two_feature_columns, two_group_columns)
+        self.recommender_system                        = Recommender(utility_matrix,       in_stock_reviews,
+                                                                     rating_column,        descriptor,
+                                                                     four_feature_columns, two_group_columns)
         
         return self.recommender_system
     
