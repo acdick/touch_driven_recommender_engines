@@ -15,7 +15,9 @@ class Farfetch():
         self.database           = self.client['farfetch']
         self.review_collection  = self.database['customer_reviews']
         self.product_collection = self.database['product_details']
-        self.recommender_system = self.init_recommender_system('URL', 'Product', ['Designer', 'Category'])
+        self.recommender_system = self.init_recommender_system('URL',      'Product',
+                                                              ['Original', 'Discount'],
+                                                              ['Designer', 'Category'])
         self.driver             = None
     
     ################################################################################
@@ -366,10 +368,11 @@ class Farfetch():
     # RECOMMENDER SYSTEM
     ################################################################################
     
-    def init_recommender_system(self, rating_column, descriptor, two_group_columns):
+    def init_recommender_system(self, rating_column, descriptor, two_feature_columns, two_group_columns):
         utility_matrix, in_stock_reviews, users, items = self.get_utility_matrix()
-        self.recommender_system                        = Recommender(in_stock_reviews, rating_column,
-                                                                     descriptor,       two_group_columns)
+        self.recommender_system                        = Recommender(in_stock_reviews,
+                                                                     rating_column,       descriptor,
+                                                                     two_feature_columns, two_group_columns)
         
         return self.recommender_system
     
@@ -377,16 +380,6 @@ class Farfetch():
         rated_item = self.recommender_system.update_user_rating(user_rating)
         
         return rated_item
-    
-    def recommender_history(self):
-        history = []
-        
-        for i in range(len(self.recommender_system.recommender_history)):
-            history.append((self.recommender_system.recommender_history[i],
-                            self.recommender_system.n_ratings_history[i],
-                            self.recommender_system.user_rating_history[i]))
-        
-        return history
     
     def most_rated(self):
         return self.recommender_system.most_rated()
@@ -422,30 +415,16 @@ class Farfetch():
     def next_recommendation(self):
         recommendation = None
         
-        if len(self.recommender_history()) == 0:
-            print('Recommended by: Most Rated')
+        if self.recommender_system.recommender_history.shape[0] == 0:
             recommendation = self.most_rated()
-        elif len(self.recommender_history()) <= 3:
-            print('Recommended by: Best Nine Breadth')
-            recommendation = self.best_nine_breadth()
-        elif len(self.recommender_history()) <= 6:
-            print('Recommended by: Best Nine Depth')
+        elif self.recommender_system.recommender_history.shape[0] <= 2:
             recommendation = self.best_nine_depth()
-        elif len(self.recommender_history()) <= 9:
-            print('Recommended by: Content-Based Pearson Similarity')
+        elif self.recommender_system.recommender_history.shape[0] <= 5:
+            recommendation = self.best_nine_breadth()
+        elif self.recommender_system.recommender_history.shape[0] <= 8:
             recommendation = self.content_based_similarity()
         else:
-            print('Recommended by: Most Rated')
             recommendation = self.most_rated()
-        
-        ## UPDATES
-        
-        # TASK 1
-        # recommender history
-        #    add number of reviews
-        #    add mean rating of current reviews
-        #    add current user rating
-        #    update running models
         
         # TASK 2
         # update Mongo database
@@ -461,17 +440,12 @@ class Farfetch():
         #    retrain models
         #    recursion call next recommendation
         
-        # TASK 4
-        # create Dashboard and Flask Application
-        
         # show web page of recommendation
-        self.driver.get(self.recommender_history()[-1])
+        self.driver.get(self.recommender_system.recommender_history.iloc[-1][self.recommender_system.rating_column])
         
         # live request of user rating
-        rating = input('Enter rating on 1 to 5 scale:\n')
-        print(rating)
-        
-        # insert user data into Mongo database
+        user_rating = input('Please enter a product rating on 1 to 5 scale:\n')
+        self.update_last_rating(user_rating)
         
         return recommendation
         

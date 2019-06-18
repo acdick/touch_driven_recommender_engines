@@ -2,14 +2,16 @@ import pandas as pd
 
 class Recommender():
     
-    def __init__(self, df, rating_column, descriptor, two_group_columns):
+    def __init__(self, df, rating_column, descriptor, two_feature_columns, two_group_columns):
         self.dataframe           = df
         self.rating_column       = rating_column
         self.descriptor          = descriptor
+        self.two_feature_columns = two_feature_columns
         self.two_group_columns   = two_group_columns
-        self.recommender_history = pd.DataFrame(columns=[self.rating_column,        self.descriptor,
-                                                         self.two_group_columns[0], self.two_group_columns[1],
-                                                         'Total Ratings',           'User Rating',
+        self.recommender_history = pd.DataFrame(columns=[self.rating_column,          self.descriptor,
+                                                         self.two_feature_columns[0], self.two_feature_columns[1],
+                                                         self.two_group_columns[0],   self.two_group_columns[1],
+                                                         'Total Ratings',             'User Rating',
                                                          'Recommended By'])
         self.product_similarity  = None
         
@@ -26,19 +28,25 @@ class Recommender():
             if recommendation not in self.recommender_history[self.rating_column].unique():
                 descriptor = self.dataframe.loc[
                     self.dataframe[self.rating_column] == recommendation].iloc[0][self.descriptor]
+                feature_one = self.dataframe.loc[
+                    self.dataframe[self.rating_column] == recommendation].iloc[0][self.two_feature_columns[0]]
+                feature_two = self.dataframe.loc[
+                    self.dataframe[self.rating_column] == recommendation].iloc[0][self.two_feature_columns[1]]
                 column_one = self.dataframe.loc[
                     self.dataframe[self.rating_column] == recommendation].iloc[0][self.two_group_columns[0]]
                 column_two = self.dataframe.loc[
                     self.dataframe[self.rating_column] == recommendation].iloc[0][self.two_group_columns[1]]
                     
                 new_recommendation = {
-                    self.rating_column:        recommendation,
-                    self.descriptor:           descriptor,
-                    self.two_group_columns[0]: column_one,
-                    self.two_group_columns[1]: column_two,
-                    'Total Ratings':           self.dataframe[self.rating_column].value_counts()[recommendation],
-                    'User Rating':             -1,
-                    'Recommended By':          recommender}
+                    self.rating_column:          recommendation,
+                    self.descriptor:             descriptor,
+                    self.two_group_columns[0]:   column_one,
+                    self.two_group_columns[1]:   column_two,
+                    self.two_feature_columns[0]: feature_one,
+                    self.two_feature_columns[1]: feature_two,
+                    'Total Ratings':             self.dataframe[self.rating_column].value_counts()[recommendation],
+                    'User Rating':               -1,
+                    'Recommended By':            recommender}
                 
                 self.recommender_history = self.recommender_history.append(new_recommendation, ignore_index=True)
                 
