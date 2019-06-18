@@ -1,9 +1,12 @@
-import pandas as pd
+from   surprise                       import Reader, Dataset
+from   surprise.prediction_algorithms import SVD
+import pandas                         as     pd
 
 class Recommender():
     
-    def __init__(self, df, rating_column, descriptor, two_feature_columns, two_group_columns):
-        self.dataframe           = df
+    def __init__(self, utility_matrix, reviews, rating_column, descriptor, two_feature_columns, two_group_columns):
+        self.utility_matrix      = utility_matrix
+        self.dataframe           = reviews
         self.rating_column       = rating_column
         self.descriptor          = descriptor
         self.two_feature_columns = two_feature_columns
@@ -159,3 +162,21 @@ class Recommender():
     ################################################################################
     # COLLABORATIVE FILTERING
     ################################################################################
+    
+    # matrix factorization with singular value decomposition for last user in Mongo database
+    def singular_value_decomposition(self, n_factors, reg_all):
+        
+        reader  = Reader(rating_scale=(1, 5))
+        data    = Dataset.load_from_df(self.utility_matrix[['User', 'URL', 'Rating']], reader)
+        dataset = data.build_full_trainset()
+        algo    = SVD(n_factors = n_factors, reg_all = reg_all)
+        algo.fit(dataset)
+        
+        return algo.predict(42, 72, verbose = True)
+    
+        # recommendations = self.product_similarity[top_favorite].sort_values(ascending = False)
+        # recommendations = recommendations.drop([top_favorite], axis=0).index
+        
+        new_recommendation = self.append_new_recommendation(recommendations, 'Singular Value Decomposition')
+        
+        return new_recommendation

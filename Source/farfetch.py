@@ -370,7 +370,7 @@ class Farfetch():
     
     def init_recommender_system(self, rating_column, descriptor, two_feature_columns, two_group_columns):
         utility_matrix, in_stock_reviews, users, items = self.get_utility_matrix()
-        self.recommender_system                        = Recommender(in_stock_reviews,
+        self.recommender_system                        = Recommender(utility_matrix,      in_stock_reviews,
                                                                      rating_column,       descriptor,
                                                                      two_feature_columns, two_group_columns)
         
@@ -395,6 +395,9 @@ class Farfetch():
     
     def content_based_similarity(self):
         return self.recommender_system.content_based_similarity()
+    
+    def singular_value_decomposition(self, n_factors, reg_all):
+        return self.recommender_system.singular_value_decomposition(n_factors, reg_all)
     
     ################################################################################
     # WEB DEMO

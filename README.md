@@ -24,10 +24,12 @@ https://www.farfetch.com/reviews
 
 ## Recommender Systems
 
-**Unpersonalized: Best Nine**
+**Unpersonalized: Most Rated**
 
-**Personalized: Content-Based**
+**Unpersonalized: Best Nine Depth**
 
-**Personalized: Content-Based Filtering**
+**Unpersonalized: Best Nine Breadth**
 
-**Personalized: Collaborative Filtering**
+**Content-Based: Pearson Similarity**
+
+**Collaborative Filtering: Singular Value Decomposition**
