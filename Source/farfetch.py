@@ -347,13 +347,6 @@ class Farfetch():
         similarity_matrix   = pd.get_dummies(similarity_features, columns=['Gender', 'Made In', 'Category'])
         similarity_matrix   = similarity_matrix.T
         
-        # MinMax scaler of continuous variables
-        # from sklearn.preprocessing   import MinMaxScaler
-        # scaler                        = MinMaxScaler()
-        # X_train[non_categorical_cols] = scaler.fit_transform(X_train[non_categorical_cols])
-        # X_test[non_categorical_cols]  = scaler.transform(    X_test[non_categorical_cols])
-        # X_train.head()
-        
         # calculate correlation matrix
         similarity_matrix   = similarity_matrix.corr(method='pearson')
         
@@ -418,30 +411,18 @@ class Farfetch():
     def next_recommendation(self):
         recommendation = None
         
-        if self.recommender_system.recommender_history.shape[0] == 0:
+        if   self.recommender_system.recommender_history.shape[0] == 0:
             recommendation = self.most_rated()
-        elif self.recommender_system.recommender_history.shape[0] <= 2:
+        elif self.recommender_system.recommender_history.shape[0] <= 1:
             recommendation = self.best_nine_depth()
-        elif self.recommender_system.recommender_history.shape[0] <= 5:
+        elif self.recommender_system.recommender_history.shape[0] <= 3:
             recommendation = self.best_nine_breadth()
-        elif self.recommender_system.recommender_history.shape[0] <= 8:
+        elif self.recommender_system.recommender_history.shape[0] <= 5:
             recommendation = self.content_based_similarity()
         else:
-            recommendation = self.most_rated()
-        
-        # TASK 2
-        # update Mongo database
-        #    insert new review into database
-        #    use 'Flatiron' prefix
-        #    refresh all models
-        
-        # TASK 3
-        # live check if product is sold out
-        # if sold out:
-        #    pop from recommendation history
-        #    pop from product similarity matrix
-        #    retrain models
-        #    recursion call next recommendation
+            n_factors      = 100
+            reg_all        = 0.01
+            recommendation = self.singular_value_decomposition(n_factors, reg_all)
         
         # show web page of recommendation
         self.driver.get(self.recommender_system.recommender_history.iloc[-1][self.recommender_system.rating_column])

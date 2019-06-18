@@ -174,16 +174,28 @@ class Recommender():
     # matrix factorization with singular value decomposition for last user in Mongo database
     def singular_value_decomposition(self, n_factors, reg_all):
         
+        # get utility matrix of local user
+        uid                              = 'web_demo_test_dummy'
+        current_utility_matrix           = pd.DataFrame(columns = ['User', 'URL', 'Rating'])
+        current_utility_matrix['URL']    = self.recommender_history['URL']
+        current_utility_matrix['Rating'] = self.recommender_history['User Rating']
+        current_utility_matrix['User']   = uid
+        
+        # combine local user utility matrix with global utility matrix
+        current_utility_matrix = current_utility_matrix.append(
+            self.utility_matrix[['User', 'URL', 'Rating']], ignore_index = True)
+        
+        # build and fit full SVD training set
         reader  = Reader(rating_scale=(1, 5))
-        data    = Dataset.load_from_df(self.utility_matrix[['User', 'URL', 'Rating']], reader)
+        data    = Dataset.load_from_df(current_utility_matrix[['User', 'URL', 'Rating']], reader)
         dataset = data.build_full_trainset()
         algo    = SVD(n_factors = n_factors, reg_all = reg_all)
         algo.fit(dataset)
         
-        return algo.predict(42, 72, verbose = True)
-    
-        # recommendations = self.product_similarity[top_favorite].sort_values(ascending = False)
-        # recommendations = recommendations.drop([top_favorite], axis=0).index
+        # calculate SVD predictions for local user
+        recommendations        = current_utility_matrix.drop(['User', 'Rating'], axis=1).drop_duplicates()
+        recommendations['SVD'] = recommendations['URL'].apply(lambda x: algo.predict(uid, x)[3])
+        recommendations        = recommendations.sort_values(by = 'SVD', ascending = False)['URL']
         
         new_recommendation = self.append_new_recommendation(recommendations, 'Singular Value Decomposition')
         
