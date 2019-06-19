@@ -1,25 +1,37 @@
 from   surprise                       import Reader, Dataset
+from   surprise.model_selection       import GridSearchCV
 from   surprise.prediction_algorithms import SVD
 import pandas                         as     pd
 
 class Recommender():
     
-    def __init__(self, utility_matrix, reviews, rating_column, descriptor, four_feature_columns, two_group_columns):
+    def __init__(self, utility_matrix, reviews, rating_column, descriptor, five_feature_columns, two_group_columns):
         self.utility_matrix       = utility_matrix
         self.dataframe            = reviews
         self.rating_column        = rating_column
         self.descriptor           = descriptor
-        self.four_feature_columns = four_feature_columns
+        self.five_feature_columns = five_feature_columns
         self.two_group_columns    = two_group_columns
         self.recommender_history  = pd.DataFrame(columns=[self.rating_column,           self.descriptor,
-                                                          self.four_feature_columns[0], self.four_feature_columns[1],
-                                                          self.four_feature_columns[2], self.four_feature_columns[3],
+                                                          self.five_feature_columns[0], self.five_feature_columns[1],
+                                                          self.five_feature_columns[2], self.five_feature_columns[3],
+                                                          self.five_feature_columns[4],
                                                           self.two_group_columns[0],    self.two_group_columns[1],
                                                           'Total Ratings',              'User Rating',
                                                           'Recommended By'])
         self.product_similarity  = None
         self.current_user        = None
         
+    def set_current_user(self, current_user):
+        self.current_user = current_user
+        
+        return self.current_user
+    
+    def clear_current_user(self):
+        self.current_user = None
+        
+        return self.current_user
+    
     def load_content_similarity_matrix(self, file_path):
         self.product_similarity = pd.read_pickle(file_path)
         
@@ -34,13 +46,15 @@ class Recommender():
                 descriptor    = self.dataframe.loc[
                     self.dataframe[self.rating_column] == recommendation].iloc[0][self.descriptor]
                 feature_one   = self.dataframe.loc[
-                    self.dataframe[self.rating_column] == recommendation].iloc[0][self.four_feature_columns[0]]
+                    self.dataframe[self.rating_column] == recommendation].iloc[0][self.five_feature_columns[0]]
                 feature_two   = self.dataframe.loc[
-                    self.dataframe[self.rating_column] == recommendation].iloc[0][self.four_feature_columns[1]]
+                    self.dataframe[self.rating_column] == recommendation].iloc[0][self.five_feature_columns[1]]
                 feature_three = self.dataframe.loc[
-                    self.dataframe[self.rating_column] == recommendation].iloc[0][self.four_feature_columns[2]]
+                    self.dataframe[self.rating_column] == recommendation].iloc[0][self.five_feature_columns[2]]
                 feature_four  = self.dataframe.loc[
-                    self.dataframe[self.rating_column] == recommendation].iloc[0][self.four_feature_columns[3]]
+                    self.dataframe[self.rating_column] == recommendation].iloc[0][self.five_feature_columns[3]]
+                feature_five  = self.dataframe.loc[
+                    self.dataframe[self.rating_column] == recommendation].iloc[0][self.five_feature_columns[4]]
                 column_one    = self.dataframe.loc[
                     self.dataframe[self.rating_column] == recommendation].iloc[0][self.two_group_columns[0]]
                 column_two    = self.dataframe.loc[
@@ -51,10 +65,11 @@ class Recommender():
                     self.descriptor:              descriptor,
                     self.two_group_columns[0]:    column_one,
                     self.two_group_columns[1]:    column_two,
-                    self.four_feature_columns[0]: feature_one,
-                    self.four_feature_columns[1]: feature_two,
-                    self.four_feature_columns[2]: feature_three,
-                    self.four_feature_columns[3]: feature_four,
+                    self.five_feature_columns[0]: feature_one,
+                    self.five_feature_columns[1]: feature_two,
+                    self.five_feature_columns[2]: feature_three,
+                    self.five_feature_columns[3]: feature_four,
+                    self.five_feature_columns[4]: feature_five,
                     'Total Ratings':              self.dataframe[self.rating_column].value_counts()[recommendation],
                     'User Rating':                -1,
                     'Recommended By':             recommender}
@@ -117,8 +132,20 @@ class Recommender():
         
         return best_nine
     
+    def best_one_subcategory(self):
+        best_one = self.best_nine()[0]
+        
+        df              = self.dataframe[[self.rating_column] + self.two_group_columns]
+        df              = df.loc[df[self.two_group_columns[0]] == best_one[0]]
+        df              = df.loc[df[self.two_group_columns[1]] == best_one[1]]
+        recommendations = df[self.rating_column].value_counts().index
+        
+        new_recommendation = self.append_new_recommendation(recommendations, 'Best Nine Depth')
+        
+        return new_recommendation
+    
     # returns the URL of the product with the most ratings in the top nine groups
-    def best_nine_breadth(self):
+    def best_nine_subcategories(self):
         new_recommendation = None
         recommendations    = []
         best_nine          = self.best_nine()
@@ -140,25 +167,12 @@ class Recommender():
         
         return new_recommendation
     
-    def best_nine_depth(self):
-        best_one = self.best_nine()[0]
-        
-        df              = self.dataframe[[self.rating_column] + self.two_group_columns]
-        df              = df.loc[df[self.two_group_columns[0]] == best_one[0]]
-        df              = df.loc[df[self.two_group_columns[1]] == best_one[1]]
-        recommendations = df[self.rating_column].value_counts().index
-        
-        new_recommendation = self.append_new_recommendation(recommendations, 'Best Nine Depth')
-        
-        return new_recommendation
-    
     ################################################################################
     # CONTENT-BASED
     ################################################################################
     
     # content-based similarity with Pearson correlation
     def content_based_similarity(self):
-        
         top_favorite    = self.user_favorites().iloc[0]
         recommendations = self.product_similarity[top_favorite].sort_values(ascending = False)
         recommendations = recommendations.drop([top_favorite], axis=0).index
@@ -171,30 +185,50 @@ class Recommender():
     # COLLABORATIVE FILTERING
     ################################################################################
     
-    # matrix factorization with singular value decomposition for last user in Mongo database
-    def singular_value_decomposition(self, n_factors, reg_all):
+    # get utility matrix of current user in the recommender history
+    def current_utility_matrix(self):
         
-        # get utility matrix of local user
-        uid                              = 'web_demo_test_dummy'
+        # create local user utility matrix from recommender history
         current_utility_matrix           = pd.DataFrame(columns = ['User', 'URL', 'Rating'])
         current_utility_matrix['URL']    = self.recommender_history['URL']
         current_utility_matrix['Rating'] = self.recommender_history['User Rating']
-        current_utility_matrix['User']   = uid
+        current_utility_matrix['User']   = self.current_user
         
         # combine local user utility matrix with global utility matrix
         current_utility_matrix = current_utility_matrix.append(
             self.utility_matrix[['User', 'URL', 'Rating']], ignore_index = True)
         
+        return current_utility_matrix
+    
+    # grid search for matrix factorization with singular value decomposition
+    def grid_search_singular_value_decomposition(self, params):
+        
+        # build and fit full grid search with the SVD training set
+        current_utility_matrix = self.current_utility_matrix()
+        reader                 = Reader(rating_scale = (1, 5))
+        data                   = Dataset.load_from_df(current_utility_matrix[['User', 'URL', 'Rating']], reader)
+        gs                     = GridSearchCV(SVD,
+                                              param_grid = params,
+                                              measures   = ['rmse', 'mae'],
+                                              cv         = 5)
+        gs.fit(data)
+        
+        return (gs.best_score['rmse'], gs.best_params['rmse'])
+    
+    # matrix factorization with singular value decomposition for last user in Mongo database
+    def singular_value_decomposition(self, n_factors, reg_all):
+        
         # build and fit full SVD training set
-        reader  = Reader(rating_scale=(1, 5))
-        data    = Dataset.load_from_df(current_utility_matrix[['User', 'URL', 'Rating']], reader)
-        dataset = data.build_full_trainset()
-        algo    = SVD(n_factors = n_factors, reg_all = reg_all)
+        current_utility_matrix = self.current_utility_matrix()
+        reader                 = Reader(rating_scale = (1, 5))
+        data                   = Dataset.load_from_df(current_utility_matrix[['User', 'URL', 'Rating']], reader)
+        dataset                = data.build_full_trainset()
+        algo                   = SVD(n_factors = n_factors, reg_all = reg_all)
         algo.fit(dataset)
         
         # calculate SVD predictions for local user
         recommendations        = current_utility_matrix.drop(['User', 'Rating'], axis=1).drop_duplicates()
-        recommendations['SVD'] = recommendations['URL'].apply(lambda x: algo.predict(uid, x)[3])
+        recommendations['SVD'] = recommendations['URL'].apply(lambda x: algo.predict(self.current_user, x)[3])
         recommendations        = recommendations.sort_values(by = 'SVD', ascending = False)['URL']
         
         new_recommendation = self.append_new_recommendation(recommendations, 'Singular Value Decomposition')

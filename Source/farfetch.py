@@ -16,7 +16,8 @@ class Farfetch():
         self.review_collection  = self.database['customer_reviews']
         self.product_collection = self.database['product_details']
         self.recommender_system = self.init_recommender_system('URL',      'Product',
-                                                              ['Original', 'Discount', 'Gender', 'Made In'],
+                                                              ['Original', 'Discount', 'On Sale',
+                                                               'Gender',   'Made In'],
                                                               ['Designer', 'Category'])
         self.driver             = None
     
@@ -361,13 +362,23 @@ class Farfetch():
     # RECOMMENDER SYSTEM
     ################################################################################
     
-    def init_recommender_system(self, rating_column, descriptor, four_feature_columns, two_group_columns):
+    def init_recommender_system(self, rating_column, descriptor, five_feature_columns, two_group_columns):
         utility_matrix, in_stock_reviews, users, items = self.get_utility_matrix()
         self.recommender_system                        = Recommender(utility_matrix,       in_stock_reviews,
                                                                      rating_column,        descriptor,
-                                                                     four_feature_columns, two_group_columns)
+                                                                     five_feature_columns, two_group_columns)
         
         return self.recommender_system
+    
+    def set_current_user(self, current_user):
+        current_user = self.recommender_system.set_current_user(current_user)
+        
+        return current_user
+    
+    def clear_current_user(self):
+        current_user = self.recommender_system.clear_current_user()
+        
+        return current_user
     
     def update_last_rating(self, user_rating):
         rated_item = self.recommender_system.update_user_rating(user_rating)
@@ -380,14 +391,17 @@ class Farfetch():
     def best_nine(self):
         return self.recommender_system.best_nine()
     
-    def best_nine_breadth(self):
-        return self.recommender_system.best_nine_breadth()
+    def best_one_subcategory(self):
+        return self.recommender_system.best_one_subcategory()
     
-    def best_nine_depth(self):
-        return self.recommender_system.best_nine_depth()
+    def best_nine_subcategories(self):
+        return self.recommender_system.best_nine_subcategories()
     
     def content_based_similarity(self):
         return self.recommender_system.content_based_similarity()
+    
+    def grid_search_singular_value_decomposition(self, params):
+        return self.recommender_system.grid_search_singular_value_decomposition(params)
     
     def singular_value_decomposition(self, n_factors, reg_all):
         return self.recommender_system.singular_value_decomposition(n_factors, reg_all)
