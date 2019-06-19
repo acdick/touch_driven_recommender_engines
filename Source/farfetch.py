@@ -257,23 +257,25 @@ class Farfetch():
         return self.product_collection
     
     # check if product is stocked out
-    def check_stock_out(self, url, soup):
-        stock_out = True
+    def check_stock_out(self, url):
+        stock_out = False
+        headers   = {'user-agent': '{} {} {}'.format('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6)',
+                                                     'AppleWebKit/537.36 (KHTML, like Gecko)',
+                                                     'Chrome/53.0.2785.143 Safari/537.36')}
+        page      = requests.get(url, headers = headers, timeout = 5)
+        soup      = BS(page.content, 'html.parser')
         
         # sold out, original price, discount, on sale
         if soup.find('button', {"data-tstid": "letMeNowWhenBack"}):
-            stock_out = False
-        
+            stock_out = True
         elif soup.find('strong', {"data-tstid": "priceInfo-original"}):
             stock_out = False
-            
         elif soup.find('del', {"data-tstid": "priceInfo-original"}):
             stock_out = False
-            
         else:
-            pass
+            stock_out = True
         
-        return product_details
+        return stock_out
     
     ################################################################################
     # DATA CLEANING
@@ -430,9 +432,14 @@ class Farfetch():
             
             # get the next recommendation
             self.next_recommendation(n_factors, reg_all)
+            url = self.recommender_system.recommender_history.iloc[-1][self.recommender_system.rating_column]
+            
+            # live check if product is stocked out
+            if self.check_stock_out(url):
+                continue
             
             # show web page of recommendation
-            self.driver.get(self.recommender_system.recommender_history.iloc[-1][self.recommender_system.rating_column])
+            self.driver.get(url)
             
             # live request of user rating
             try:
