@@ -1,7 +1,7 @@
 from   recommender import Recommender
 from   selenium    import webdriver
 from   bs4         import BeautifulSoup as BS
-import pandas      as     pd
+import pandas                           as pd
 import requests
 import pymongo
 import time
@@ -371,14 +371,10 @@ class Farfetch():
         return self.recommender_system
     
     def set_current_user(self, current_user):
-        current_user = self.recommender_system.set_current_user(current_user)
-        
-        return current_user
+        return self.recommender_system.set_current_user(current_user)
     
     def clear_current_user(self):
-        current_user = self.recommender_system.clear_current_user()
-        
-        return current_user
+        return self.recommender_system.clear_current_user()
     
     def update_last_rating(self, user_rating):
         rated_item = self.recommender_system.update_user_rating(user_rating)
@@ -412,39 +408,62 @@ class Farfetch():
     
     def start_demo(self):
         self.driver = webdriver.Chrome('/Users/flatironschool/Downloads/chromedriver')
-        self.new_user()
         
         return None
     
-    def new_user(self):
+    def new_user(self, n_factors, reg_all):
         self.driver.get('https://www.farfetch.com')
         self.recommender_system.clear_history()
         
-        return None
+        new_user = 'flatiron_' + input('Please enter your name:\n')
+        self.set_current_user(new_user)
         
-    def next_recommendation(self):
+        print('Current user: ' + self.recommender_system.current_user)
+        self.rolling_recommendations(n_factors, reg_all)
+        
+        return self.recommender_system.recommender_history
+        
+    def rolling_recommendations(self, n_factors, reg_all):
+        
+        user_rating = 5
+        while 1 <= user_rating <= 5:
+            
+            # get the next recommendation
+            self.next_recommendation(n_factors, reg_all)
+            
+            # show web page of recommendation
+            self.driver.get(self.recommender_system.recommender_history.iloc[-1][self.recommender_system.rating_column])
+            
+            # live request of user rating
+            try:
+                user_rating = int(input('Please enter a product rating on 1 to 5 scale:\n'))
+                self.update_last_rating(user_rating)
+            except:
+                break
+            
+        if user_rating < 1:
+            user_rating = 1
+        if user_rating > 5:
+            user_rating = 5
+            
+        self.update_last_rating(user_rating)
+        
+        return self.recommender_system.recommender_history
+    
+    def next_recommendation(self, n_factors, reg_all):
         recommendation = None
         
         if   self.recommender_system.recommender_history.shape[0] == 0:
             recommendation = self.most_rated()
-        elif self.recommender_system.recommender_history.shape[0] <= 1:
-            recommendation = self.best_nine_depth()
-        elif self.recommender_system.recommender_history.shape[0] <= 3:
-            recommendation = self.best_nine_breadth()
-        elif self.recommender_system.recommender_history.shape[0] <= 5:
+        elif self.recommender_system.recommender_history.shape[0] <= 2:
+            recommendation = self.best_one_subcategory()
+        elif self.recommender_system.recommender_history.shape[0] <= 6:
+            recommendation = self.best_nine_subcategories()
+        elif self.recommender_system.recommender_history.shape[0] <= 10:
             recommendation = self.content_based_similarity()
         else:
-            n_factors      = 100
-            reg_all        = 0.01
             recommendation = self.singular_value_decomposition(n_factors, reg_all)
-        
-        # show web page of recommendation
-        self.driver.get(self.recommender_system.recommender_history.iloc[-1][self.recommender_system.rating_column])
-        
-        # live request of user rating
-        user_rating = input('Please enter a product rating on 1 to 5 scale:\n')
-        self.update_last_rating(user_rating)
-        
+            
         return recommendation
         
     def end_demo(self):

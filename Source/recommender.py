@@ -102,7 +102,7 @@ class Recommender():
     # returns the URL of the product with the most ratings
     def most_rated(self):
         recommendations    = self.dataframe[self.rating_column].value_counts().index
-        new_recommendation = self.append_new_recommendation(recommendations, 'Most Rated')
+        new_recommendation = self.append_new_recommendation(recommendations, 'Most Rated Products')
         
         return new_recommendation
     
@@ -140,7 +140,7 @@ class Recommender():
         df              = df.loc[df[self.two_group_columns[1]] == best_one[1]]
         recommendations = df[self.rating_column].value_counts().index
         
-        new_recommendation = self.append_new_recommendation(recommendations, 'Best Nine Depth')
+        new_recommendation = self.append_new_recommendation(recommendations, 'Best One Subcategory')
         
         return new_recommendation
     
@@ -162,7 +162,7 @@ class Recommender():
                 except:
                     pass
             
-            new_recommendation = self.append_new_recommendation(recommendations, 'Best Nine Breadth')
+            new_recommendation = self.append_new_recommendation(recommendations, 'Best Nine Subcategories')
             i += 1
         
         return new_recommendation
