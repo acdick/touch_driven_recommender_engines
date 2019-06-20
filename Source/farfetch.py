@@ -462,11 +462,11 @@ class Farfetch():
         
         if   self.recommender_system.recommender_history.shape[0] == 0:
             recommendation = self.most_rated()
-        elif self.recommender_system.recommender_history.shape[0] <= 2:
+        elif self.recommender_system.recommender_history.shape[0] <= 1:
             recommendation = self.best_one_subcategory()
-        elif self.recommender_system.recommender_history.shape[0] <= 6:
+        elif self.recommender_system.recommender_history.shape[0] <= 3:
             recommendation = self.best_nine_subcategories()
-        elif self.recommender_system.recommender_history.shape[0] <= 10:
+        elif self.recommender_system.recommender_history.shape[0] <= 6:
             recommendation = self.content_based_similarity()
         else:
             recommendation = self.singular_value_decomposition(n_factors, reg_all)

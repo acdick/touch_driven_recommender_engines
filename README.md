@@ -1,5 +1,8 @@
 # Farfetch: Understanding the Customer
 
+** View the pitch deck:
+
+
 ## Data Stack
 
 **Python, BeautifulSoup, Selenium, MongoDB, Pandas**
