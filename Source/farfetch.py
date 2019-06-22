@@ -405,7 +405,7 @@ class Farfetch():
         return self.recommender_system.singular_value_decomposition(n_factors, reg_all)
     
     ################################################################################
-    # WEB DEMO
+    # RECOMMENDER SYSTEM LIVE DEMO
     ################################################################################
     
     def start_demo(self):
@@ -460,13 +460,13 @@ class Farfetch():
     def next_recommendation(self, n_factors, reg_all):
         recommendation = None
         
-        if   self.recommender_system.recommender_history.shape[0] == 0:
+        if   self.recommender_system.recommender_history.shape[0] <= 3:
             recommendation = self.most_rated()
-        elif self.recommender_system.recommender_history.shape[0] <= 1:
-            recommendation = self.best_one_subcategory()
-        elif self.recommender_system.recommender_history.shape[0] <= 3:
-            recommendation = self.best_nine_subcategories()
         elif self.recommender_system.recommender_history.shape[0] <= 6:
+            recommendation = self.best_one_subcategory()
+        elif self.recommender_system.recommender_history.shape[0] <= 15:
+            recommendation = self.best_nine_subcategories()
+        elif self.recommender_system.recommender_history.shape[0] <= 18:
             recommendation = self.content_based_similarity()
         else:
             recommendation = self.singular_value_decomposition(n_factors, reg_all)
