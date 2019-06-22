@@ -1,24 +1,69 @@
 # Farfetch: Understanding the Customer
 
-![Touch-Driven Recommender Engines](/Plots/Touch_Driven_Recommender_Engines.png)
-
 ## How to Navigate This Repository
 
-Browse the pitch deck about Touch-Driven Recommender Engines:
+**Touch-Driven Recommender Engines**
+
+Browse the pitch deck:
 https://github.com/acdick/farfetch_understanding_the_customer/blob/master/Farfetch_Understanding_the_Customer.pdf
 
-Read the full story on Medium about Touch-Driven Recommender Engines:
+Read the full story on Medium:
+https://medium.com/@adam.c.dick/touch-driven-recommender-engines-85b6c722a7d9
+
+**Explore the Data**
+
+* Data Gathering:
+https://github.com/acdick/farfetch_understanding_the_customer/blob/master/Source/01_Data_Gathering.ipynb
+
+* Exploratory Data Analysis: https://github.com/acdick/farfetch_understanding_the_customer/blob/master/Source/02_Exploratory_Data_Analysis.ipynb
+
+* Recommender Engine Unit Tests:
+https://github.com/acdick/farfetch_understanding_the_customer/blob/master/Source/03_Recommender_Systems.ipynb
+
+* Recommender Engine Live Demo:
+https://github.com/acdick/farfetch_understanding_the_customer/blob/master/Source/04_Live_Demo.ipynb
+
+**Review the Source Code**
+
+* The Recommender System class:
+https://github.com/acdick/farfetch_understanding_the_customer/blob/master/Source/recommender.py
+
+* The Farfetch class:
+https://github.com/acdick/farfetch_understanding_the_customer/blob/master/Source/farfetch.py
 
 ## The Project Data Stack
 
-* Business Understanding:                 Brand Management, Consumer Journeys
-* Data Mining & Cleaning:                 Requests, BeautifulSoup, HTML
-* Data Warehousing:                       MongoDB, NoSQL, JSON, Pickle
-* Data Exploration & Feature Engineering: Python, Numpy, Pandas
-* Predictive Modeling:                    Surprise
-* Data Visualization:                     Selenium Webdriver, Seaborn, Matplotlib
+**Business Understanding**
+* Brand Management
+* Consumer Journeys
+
+**Programming Languages**
+* Python
+
+**Data Mining & Cleaning**
+* Selenium Webdriver
+* Requests
+* BeautifulSoup / HTML
+
+**Data Warehousing**
+* MongoDB / NoSQL
+* JSON
+* Pickle
+
+**Data Exploration & Feature Engineering**
+* Pandas
+* Numpy
+
+**Predictive Modeling**
+* Surprise / Singular Value Decomposition
+
+**Data Visualization**
+* Seaborn
+* Matplotlib
 
 ## Data Product Inputs and Outputs
+
+![Understanding the Customer: Who They Are](/Plots/Who_They_Are.png)
 
 **Farfetch Customer Reviews**<br>
 https://www.farfetch.com/reviews
@@ -42,9 +87,9 @@ https://www.farfetch.com/reviews
 * Non-Repeating Rolling Recommendations
 * Synchronization with NoSQL Database
 
-![Understanding the Customer: Who They Are](/Plots/Who_They_Are.png)
-
 ## A Touch-Driven Recommender Engine
+
+![Touch-Driven Recommender Engines](/Plots/Touch_Driven_Recommender_Engines.png)
 
 **Unpersonalized: The Most-Rated Individual Products**
 * 3x recommendations
@@ -66,5 +111,7 @@ https://www.farfetch.com/reviews
 
 ![Content-Based Similarity: Pearson Correlation](/Plots/Content_Based_Similarity_Pearson_Correlation.png)
 
-**Collaborative Filtering: Matrix Factorization via Singular Value Decomposition**
+**User-to-User Collaborative Filtering: Matrix Factorization via Singular Value Decomposition**
 * Nx recommendations
+
+![Collaborative Filtering: Singular Value Decomposition](/Plots/Customer_Product_Utility_Matrix.png)
