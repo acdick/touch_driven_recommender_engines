@@ -1,16 +1,18 @@
 # Farfetch: Understanding the Customer
 
+![Touch-Driven Recommender Engines](/Plots/Touch_Driven_Recommender_Engines.png)
+
 ## How to Navigate This Repository
 
 **Touch-Driven Recommender Engines**
 
-Browse the [pitch deck](Farfetch_Understanding_the_Customer.pdf)
-Read the [full story](https://medium.com/@adam.c.dick/touch-driven-recommender-engines-85b6c722a7d9) on Medium:
+* Browse the [pitch deck](Farfetch_Understanding_the_Customer.pdf)
+* Read the [full story](https://medium.com/@adam.c.dick/touch-driven-recommender-engines-85b6c722a7d9) on Medium:
 
 **Review the Source Code**
 
-* [The Recommender System class](/Source/recommender.py)
-* [The Farfetch class](/Source/farfetch.py)
+* The [Recommender System](/Source/recommender.py) class
+* The [Farfetch](/Source/farfetch.py) class
 
 **Explore the Data**
 
@@ -51,8 +53,6 @@ Read the [full story](https://medium.com/@adam.c.dick/touch-driven-recommender-e
 
 ## Data Product Inputs and Outputs
 
-![Understanding the Customer: Who They Are](/Plots/Who_They_Are.png)
-
 **Farfetch Customer Reviews**<br>
 https://www.farfetch.com/reviews
 
@@ -75,9 +75,7 @@ https://www.farfetch.com/reviews
 * Non-Repeating Rolling Recommendations
 * Synchronization with NoSQL Database
 
-## A Touch-Driven Recommender Engine
-
-![Touch-Driven Recommender Engines](/Plots/Touch_Driven_Recommender_Engines.png)
+## Recommender Schedule
 
 **Unpersonalized: The Most-Rated Individual Products**
 * 3x recommendations
