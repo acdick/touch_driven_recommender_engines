@@ -17,8 +17,8 @@ class Recommender():
                                                           self.five_feature_columns[2], self.five_feature_columns[3],
                                                           self.five_feature_columns[4],
                                                           self.two_group_columns[0],    self.two_group_columns[1],
-                                                          'Total Ratings',              'User Rating',
-                                                          'Recommended By'])
+                                                          'Total Ratings',              'Average Rating',
+                                                          'User Rating',                'Recommended By'])
         self.product_similarity  = None
         self.current_user        = None
         
@@ -71,6 +71,7 @@ class Recommender():
                     self.five_feature_columns[3]: feature_four,
                     self.five_feature_columns[4]: feature_five,
                     'Total Ratings':              self.dataframe[self.rating_column].value_counts()[recommendation],
+                    'Average Rating':             self.dataframe.groupby([self.rating_column]).mean()['Rating'][recommendation],
                     'User Rating':                -1,
                     'Recommended By':             recommender}
                 
