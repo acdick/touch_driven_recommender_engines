@@ -4,20 +4,20 @@
 
 **Touch-Driven Recommender Engines**
 
-Browse the [pitch deck](/blob/master/Farfetch_Understanding_the_Customer.pdf)
+Browse the [pitch deck](Farfetch_Understanding_the_Customer.pdf)
 Read the [full story](https://medium.com/@adam.c.dick/touch-driven-recommender-engines-85b6c722a7d9) on Medium:
 
 **Explore the Data**
 
-* [Data Gathering](/blob/master/Source/01_Data_Gathering.ipynb)
-* [Exploratory Data Analysis](/blob/master/Source/02_Exploratory_Data_Analysis.ipynb)
-* [Recommender Engine Unit Tests](/blob/master/Source/03_Recommender_Systems.ipynb)
-* [Recommender Engine Live Demo](/blob/master/Source/04_Live_Demo.ipynb)
+* [Data Gathering](/Source/01_Data_Gathering.ipynb)
+* [Exploratory Data Analysis](/Source/02_Exploratory_Data_Analysis.ipynb)
+* [Recommender Engine Unit Tests](/Source/03_Recommender_Systems.ipynb)
+* [Recommender Engine Live Demo](/Source/04_Live_Demo.ipynb)
 
 **Review the Source Code**
 
-* [The Recommender System class](/blob/master/Source/recommender.py)
-* [The Farfetch class](/blob/master/Source/farfetch.py)
+* [The Recommender System class](/Source/recommender.py)
+* [The Farfetch class](/Source/farfetch.py)
 
 ## The Project Data Stack
 
