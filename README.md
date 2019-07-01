@@ -4,10 +4,10 @@
 
 ## How to Navigate This Repository
 
-**Touch-Driven Recommender Engines**
+**Learn about Touch-Driven Recommender Engines**
 
 * Browse the [pitch deck](Farfetch_Understanding_the_Customer.pdf)
-* Read the [full story](https://medium.com/@adam.c.dick/touch-driven-recommender-engines-85b6c722a7d9) on Medium:
+* Read the [full story](https://medium.com/swlh/touch-driven-recommender-engines-85b6c722a7d9?source=friends_link&sk=436886dcec00e828fffdeb6c23ed56a5) on The Startup, a Medium publication
 
 **Review the Source Code**
 
