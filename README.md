@@ -1,6 +1,6 @@
 RECOMMENDER SYSTEMS
 # Touch-Driven Recommender Engines
-Understanding the Customer
+UNDERSTANDING THE CUSTOMER
 
 [Browse the pitch deck](Farfetch_Understanding_the_Customer.pdf)
 
