@@ -1,21 +1,46 @@
-# Farfetch: Understanding the Customer
-A fashion e-commerce recommender system
+RECOMMENDER SYSTEMS
+# Touch-Driven Recommender Engines
+Understanding the Customer
 
-## About this repository
+[Browse the pitch deck](Farfetch_Understanding_the_Customer.pdf)
 
-**Learn about Touch-Driven Recommender Engines**
-* [Browse the pitch deck](Farfetch_Understanding_the_Customer.pdf)
-* [Read the full story on The Startup, a Medium publication](https://medium.com/swlh/touch-driven-recommender-engines-85b6c722a7d9?source=friends_link&sk=436886dcec00e828fffdeb6c23ed56a5)
+In the digital age, the internet connects billions of people to countless products around the world, providing consumers with more choices than ever before. In 2016, 185,000 sellers carried over 353 million products in the Amazon Marketplace alone. While savvy choosers may find exactly what they want, many consumers can be paralyzed by the decision-making process.
+
+The Jam Experiment, published by Sheena Sethi Iyengar and Mark Lepper in 2001, studied how choice influences consumer behavior. An assortment of 24 jams attracted more customers (60%) than six jams (40%). But only 3% of shoppers purchased from the large set, while 30% bought from the small one. Shoppers felt confident in choosing the best jam when offered fewer options.
+
+Recommender systems assist consumers in the search and discovery of new products and services, selectively reducing the option set presented to them. Demonstrating their business value, Netflix attributes $1 billion in annual cost savings to its AI recommender system. These systems filter options through several approaches involving varying levels of personalization.
+
+Personalized recommender systems suffer from the “cold start” problem, in which they require some initial data about customer preferences to make targeted recommendations. To address this issue, demographic data mining approaches can pre-populate assumptions about a new consumer, while ensemble techniques can aggregate multiple recommender systems.
+
+But perhaps we can leverage simple unpersonalized recommender systems to follow the touch points of the consumer journey. We can tackle the cold start problem by recommending popular products to new customers and then progressively switching to more personalized recommendations. So let’s try to implement a touch-driven recommender engine for an e-commerce platform.
+
+[Continue reading the full story on The Startup, a Medium publication](https://medium.com/swlh/touch-driven-recommender-engines-85b6c722a7d9?source=friends_link&sk=436886dcec00e828fffdeb6c23ed56a5)
+
+## Project Features
+
+**Consumer journey**
+* Touch-Driven Recommender Engine
+* Live Checkpoint for Inventory Stockouts
+* Non-Repeating Rolling Recommendations
+* Synchronization with NoSQL Database
+
+## Data Products
 
 **Explore the repository**
-* [Data Gathering](/Source/01_Data_Gathering.ipynb)
-* [Exploratory Data Analysis](/Source/02_Exploratory_Data_Analysis.ipynb)
-* [Recommender Engine Unit Tests](/Source/03_Recommender_Systems.ipynb)
-* [Recommender Engine Live Demo](/Source/04_Live_Demo.ipynb)
+* [Data Gathering](/src/01_Data_Gathering.ipynb)
+* [Exploratory Data Analysis](/src/02_Exploratory_Data_Analysis.ipynb)
+* [Recommender Engine Unit Tests](/src/03_Recommender_Systems.ipynb)
+* [Recommender Engine Live Demo](/src/04_Live_Demo.ipynb)
 
-**Review the source code**
-* [View the Recommender class](/Source/recommender.py)
-* [The Farfetch class](/Source/farfetch.py)
+**Data products**
+* [Farfetch customer reviews](https://www.farfetch.com/reviews): Pieces Bought, Product URL, Rating, Reviewed By
+* Farfetch product details: Original Price, Discount, Designer, Gender, Made In, Category
+
+## Source Code
+
+**[The Recommender Class](/src/recommender.py)**
+
+**[The Farfetch Class](/src/farfetch.py)**
 
 **The project data stack**
 * Business Understanding: Brand Management, Consumer Journeys
@@ -26,31 +51,23 @@ A fashion e-commerce recommender system
 * Predictive Modeling: Surprise / Singular Value Decomposition
 * Data Visualization: Seaborn, Matplotlib
 
-**Data products**
-* [Farfetch customer reviews](https://www.farfetch.com/reviews): Pieces Bought, Product URL, Rating, Reviewed By
-* Farfetch product details: Original Price, Discount, Designer, Gender, Made In, Category
-
-**Consumer journey**
-* Touch-Driven Recommender Engine
-* Live Checkpoint for Inventory Stockouts
-* Non-Repeating Rolling Recommendations
-* Synchronization with NoSQL Database
+## Sample Output
 
 **Recommender Schedule**
-![Touch-Driven Recommender Engines](/Plots/Touch_Driven_Recommender_Engines.png)
+![Touch-Driven Recommender Engines](/img/Touch_Driven_Recommender_Engines.png)
 
 * Unpersonalized: The Most-Rated Individual Products (3x recommendations)
-![The Most-Rated Individual Products](/Plots/The_Most_Rated_Individual_Products.png)
+![The Most-Rated Individual Products](/img/The_Most_Rated_Individual_Products.png)
 
 * Unpersonalized: The "Best One" Most-Rated Subcategory (3x recommendations)
-![The Best One Most-Rated Subcategory](/Plots/The_Best_One_Most_Rated_Subcategory.png)
+![The Best One Most-Rated Subcategory](/img/The_Best_One_Most_Rated_Subcategory.png)
 
 * Unpersonalized: The "Best Nine" Most-Rated Subcategories (9x recommendations)
-![The Best Nine Most-Rated Subcategories](/Plots/The_Best_Nine_Most_Rated_Subcategories.png)
+![The Best Nine Most-Rated Subcategories](/img/The_Best_Nine_Most_Rated_Subcategories.png)
 
 * Content-Based Filtering: Product Similarity via Pearson Correlation (3x recommendations)
-![Content-Based Similarity: Pearson Correlation](/Plots/Content_Based_Similarity_Pearson_Correlation.png)
+![Content-Based Similarity: Pearson Correlation](/img/Content_Based_Similarity_Pearson_Correlation.png)
 
 * User-to-User Collaborative Filtering: Matrix Factorization via Singular Value Decomposition (Nx recommendations)
-![Collaborative Filtering: Singular Value Decomposition](/Plots/Collaborative_Filtering_SVD.png)
-![Collaborative Filtering: Customer-Product Utility Matrix](/Plots/Customer_Product_Utility_Matrix.png)
+![Collaborative Filtering: Singular Value Decomposition](/img/Collaborative_Filtering_SVD.png)
+![Collaborative Filtering: Customer-Product Utility Matrix](/img/Customer_Product_Utility_Matrix.png)
