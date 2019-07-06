@@ -51,27 +51,27 @@ But perhaps we can leverage simple unpersonalized recommender systems to follow 
 * Predictive Modeling: Surprise / Singular Value Decomposition
 * Data Visualization: Seaborn, Matplotlib
 
-## Sample Output
+## Output Results
 
 **Recommender Schedule**
 ![Touch-Driven Recommender Engines](/img/Touch_Driven_Recommender_Engines.png)
 
-* Unpersonalized: The Most-Rated Individual Products (3x recommendations)
+**Unpersonalized: The Most-Rated Individual Products (3x recommendations)**
 ![The Most-Rated Individual Products](/img/The_Most_Rated_Individual_Products.png)
 ![The Most-Rated Individual Products Farfetch](/img/The_Most_Rated_Individual_Products_Farfetch.png)
 
-* Unpersonalized: The "Best One" Most-Rated Subcategory (3x recommendations)
+**Unpersonalized: The "Best One" Most-Rated Subcategory (3x recommendations)**
 ![The Best One Most-Rated Subcategory](/img/The_Best_One_Most_Rated_Subcategory.png)
 ![The Best One Most-Rated Subcategory Farfetch](/img/The_Best_One_Most_Rated_Subcategory_Farfetch.png)
 
-* Unpersonalized: The "Best Nine" Most-Rated Subcategories (9x recommendations)
+**Unpersonalized: The "Best Nine" Most-Rated Subcategories (9x recommendations)**
 ![The Best Nine Most-Rated Subcategories](/img/The_Best_Nine_Most_Rated_Subcategories.png)
 ![The Best Nine Most-Rated Subcategories Farfetch](/img/The_Best_Nine_Most_Rated_Subcategories_Farfetch.png)
 
-* Content-Based Filtering: Product Similarity via Pearson Correlation (3x recommendations)
+**Content-Based Filtering: Product Similarity via Pearson Correlation (3x recommendations)**
 ![Content-Based Similarity: Pearson Correlation](/img/Content_Based_Similarity_Pearson_Correlation.png)
 ![Content-Based Similarity: Pearson Correlation Farfetch](/img/Content_Based_Similarity_Pearson_Correlation_Farfetch.png)
 
-* User-to-User Collaborative Filtering: Matrix Factorization via Singular Value Decomposition (Nx recommendations)
+**User-to-User Collaborative Filtering: Matrix Factorization via Singular Value Decomposition (Nx recommendations)**
 ![Collaborative Filtering: Singular Value Decomposition](/img/Collaborative_Filtering_SVD.png)
 ![Collaborative Filtering: Customer-Product Utility Matrix](/img/Customer_Product_Utility_Matrix.png)
