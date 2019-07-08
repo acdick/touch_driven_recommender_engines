@@ -25,7 +25,7 @@ But perhaps we can leverage simple unpersonalized recommender systems to follow 
 * [Contact Information](#contact-information)
 
 ## Project Features
-DIGITAL MARKETING | BRAND MANAGEMENT | CONSUMER JOURNEYS
+DIGITAL MARKETING | BRAND MANAGEMENT | CONSUMER JOURNEYS | RECOMMENDER SYSTEMS
 
 ![Touch-Driven Recommender Engines](/img/Touch_Driven_Recommender_Engines.png)
 
