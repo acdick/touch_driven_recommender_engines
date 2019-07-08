@@ -85,7 +85,7 @@ SELENIUM | REQUESTS | BEAUTIFULSOUP | HTML
 * 7,788 Colors
 * 12,596 Styles
 
-[## Source Code](/src/)
+## Source Code
 PYTHON | MONGODB | NOSQL | JSON | PICKLE | PANDAS | NUMPY | SURPRISE | SINGULAR VALUE DECOMPOSITION
 
 **[The Farfetch Class](/src/farfetch.py)**
