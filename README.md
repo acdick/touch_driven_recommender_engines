@@ -25,7 +25,7 @@ But perhaps we can leverage simple unpersonalized recommender systems to follow 
 * [Contact Information](#contact-information)
 
 ## Project Features
-BRAND MANAGEMENT | CONSUMER JOURNEYS
+DIGITAL MARKETING | BRAND MANAGEMENT | CONSUMER JOURNEYS
 
 ![Touch-Driven Recommender Engines](/img/Touch_Driven_Recommender_Engines.png)
 
@@ -68,7 +68,7 @@ SELENIUM | REQUESTS | BEAUTIFULSOUP | HTML
 * Color
 * Made In
 
-**[Data Gathering](/src/01_Data_Gathering.ipynb)**
+**[Data Mining](/src/01_Data_Gathering.ipynb)**
 * 100,000 customer reviews
 * 21,641 product ratings
 * 16,105 in-stock product ratings
@@ -85,7 +85,7 @@ SELENIUM | REQUESTS | BEAUTIFULSOUP | HTML
 * 7,788 Colors
 * 12,596 Styles
 
-## Source Code
+[## Source Code](/src/)
 PYTHON | MONGODB | NOSQL | JSON | PICKLE | PANDAS | NUMPY | SURPRISE | SINGULAR VALUE DECOMPOSITION
 
 **[The Farfetch Class](/src/farfetch.py)**
@@ -96,8 +96,8 @@ PYTHON | MONGODB | NOSQL | JSON | PICKLE | PANDAS | NUMPY | SURPRISE | SINGULAR 
 * Live demonstration of recommender engine
 
 **[The Recommender Class](/src/recommender.py)**
-* Object and recommender history initialization
-* Unpersonalized recommender
+* Object and history initialization
+* Unpersonalized recommenders
 * Content-based recommender
 * Collaborative filtering recommender
 
@@ -118,35 +118,35 @@ SEABORN / MATPLOTLIB
 4. Create new user
 5. End live demo
 
-**Unpersonalized**
+**Unpersonalized Recommender**
 * The Most-Rated Individual Products
 * 3x Recommendations
 
 ![The Most-Rated Individual Products](/img/The_Most_Rated_Individual_Products.png)
 ![The Most-Rated Individual Products Farfetch](/img/The_Most_Rated_Individual_Products_Farfetch.png)
 
-**Unpersonalized**
+**Unpersonalized Recommender**
 * The "Best One" Most-Rated Subcategory
 * 3x Recommendations
 
 ![The Best One Most-Rated Subcategory](/img/The_Best_One_Most_Rated_Subcategory.png)
 ![The Best One Most-Rated Subcategory Farfetch](/img/The_Best_One_Most_Rated_Subcategory_Farfetch.png)
 
-**Unpersonalized**
+**Unpersonalized Recommender**
 * The "Best Nine" Most-Rated Subcategories
 * 9x Recommendations
 
 ![The Best Nine Most-Rated Subcategories](/img/The_Best_Nine_Most_Rated_Subcategories.png)
 ![The Best Nine Most-Rated Subcategories Farfetch](/img/The_Best_Nine_Most_Rated_Subcategories_Farfetch.png)
 
-**Content-Based Filtering**
+**Content-Based Filtering Recommender**
 * Product Similarity via Pearson Correlation
 * 3x Recommendations
 
 ![Content-Based Similarity: Pearson Correlation](/img/Content_Based_Similarity_Pearson_Correlation.png)
 ![Content-Based Similarity: Pearson Correlation Farfetch](/img/Content_Based_Similarity_Pearson_Correlation_Farfetch.png)
 
-**User-to-User Collaborative Filtering**
+**User-to-User Collaborative Filtering Recommender**
 * Matrix Factorization via Singular Value Decomposition
 * Unlimited Recommendations
 
