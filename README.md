@@ -18,44 +18,69 @@ But perhaps we can leverage simple unpersonalized recommender systems to follow 
 
 ## Repository Contents
 
-* [Project Features](#project-features)
-* [Data Products](#data-products)
-* [Source Code](#source-code)
-* [Output Results](#output-results)
+[Project Features](#project-features)
+[Data Products](#data-products)
+[Source Code](#source-code)
+[Output Results](#output-results)
 
 ## Project Features
 
 ![Touch-Driven Recommender Engines](/img/Touch_Driven_Recommender_Engines.png)
 
-* **Touch-Driven Recommender Engine:** A system that records the touch points for each customer and their responses to adaptive recommendations.
+- [x] **Touch-Driven Recommender Engine:**
+A system that records the touch points for each customer and their responses to adaptive recommendations.
 
-* **Live Checkpoint for Inventory Stockout:** A check that each recommended product is in-stock, querying the status of the product webpage or database.
+- [x] **Live Checkpoint for Inventory Stockout:**
+A check that each recommended product is in-stock, querying the status of the product webpage or database.
 
-* **Non-Repeating Rolling Recommendations:** A check that each product recommended to the customer is novel based on the recommendation history.
+- [x] **Non-Repeating Rolling Recommendations:**
+A check that each product recommended to the customer is novel based on the recommendation history.
 
-* **Synchronization with NoSQL Database:** Database feedback of the customer response for each recommendation prior to issuing the next recommendation.
-
-**Featured Notebooks**
-* [Data Gathering](/src/01_Data_Gathering.ipynb)
-* [Exploratory Data Analysis](/src/02_Exploratory_Data_Analysis.ipynb)
-* [Recommender Engine Unit Tests](/src/03_Recommender_Systems.ipynb)
-* [Recommender Engine Live Demo](/src/04_Live_Demo.ipynb)
+- [ ] **Synchronization with NoSQL Database:**
+Database feedback of the customer response for each recommendation prior to issuing the next recommendation.
 
 ## Data Products
 
 **[Farfetch Customer Reviews](https://www.farfetch.com/reviews)**
-* Pieces Bought
-* Product URL
+* Date
 * Rating
+* Pieces Bought
+* Product URLs
+* Ordered From
 * Reviewed By
+* Reviewer Comments
 
 **[Farfetch Product Details](https://www.farfetch.com/shopping/women/gucci-leather-belt-with-double-g-buckle-item-12132461.aspx)**
+* Product URL
+* In-Stock / Sold Out
 * Original Price
-* Discount
+* Discount %
+* Sale Price
 * Designer
+* Product
 * Gender
-* Made In
 * Category
+* Subcategory
+* Style
+* Color
+* Made In
+
+**[Data Gathering](/src/01_Data_Gathering.ipynb)**
+* 100,000 customer reviews
+* 21,641 product ratings
+* 16,105 in-stock product ratings
+* 9,667 unique customers
+* 13,518 unique products
+
+**[Exploratory Data Analysis](/src/02_Exploratory_Data_Analysis.ipynb)**
+* 3 Genders (Women, Men, Kids)
+* 5 Made In Locations
+* 16 Discount Levels
+* 1,184 Designers
+* 29 Categories
+* 374 Subcategories
+* 7,788 Colors
+* 12,596 Styles
 
 ## Source Code
 
@@ -63,7 +88,7 @@ But perhaps we can leverage simple unpersonalized recommender systems to follow 
 
 **[The Farfetch Class](/src/farfetch.py)**
 
-**The Project Data Stack**
+**Project Data Stack**
 * Business Understanding: Brand Management, Consumer Journeys
 * Programming Languages: Python
 * Data Mining & Cleaning: Selenium Webdriver, Requests, BeautifulSoup / HTML
@@ -72,7 +97,16 @@ But perhaps we can leverage simple unpersonalized recommender systems to follow 
 * Predictive Modeling: Surprise / Singular Value Decomposition
 * Data Visualization: Seaborn, Matplotlib
 
+**[Recommender Engine Unit Tests](/src/03_Recommender_Systems.ipynb)**
+* The Most-Rated Individual Products
+* The “Best One” Most-Rated Subcategory
+* The “Best Nine” Most-Rated Subcategories
+* Content-Based Product Similarity via Pearson Correlation
+* User-to-User Collaborative Filtering via Singular Value Decomposition
+
 ## Output Results
+
+**[Recommender Engine Demo](/src/04_Live_Demo.ipynb)**
 
 **Unpersonalized: The Most-Rated Individual Products (3x recommendations)**
 ![The Most-Rated Individual Products](/img/The_Most_Rated_Individual_Products.png)
