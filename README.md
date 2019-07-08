@@ -16,27 +16,46 @@ But perhaps we can leverage simple unpersonalized recommender systems to follow 
 
 [Continue reading the full story in The Startup, a Medium publication](https://medium.com/swlh/touch-driven-recommender-engines-85b6c722a7d9?source=friends_link&sk=436886dcec00e828fffdeb6c23ed56a5)
 
+## Repository Contents
+
 * [Project Features](#project-features)
+* [Data Products](#data-products)
+* [Source Code](#source-code)
+* [Output Results](#output-results)
 
 ## Project Features
 
-**Consumer journey**
-* Touch-Driven Recommender Engine
-* Live Checkpoint for Inventory Stockouts
-* Non-Repeating Rolling Recommendations
-* Synchronization with NoSQL Database
+![Touch-Driven Recommender Engines](/img/Touch_Driven_Recommender_Engines.png)
 
-## Data Products
+* **Touch-Driven Recommender Engine:** A system that records the touch points for each customer and their responses to adaptive recommendations.
 
-**Explore the repository**
+* **Live Checkpoint for Inventory Stockout:** A check that each recommended product is in-stock, querying the status of the product webpage or database.
+
+* **Non-Repeating Rolling Recommendations:** A check that each product recommended to the customer is novel based on the recommendation history.
+
+* **Synchronization with NoSQL Database:** Database feedback of the customer response for each recommendation prior to issuing the next recommendation.
+
+**Featured Notebooks**
 * [Data Gathering](/src/01_Data_Gathering.ipynb)
 * [Exploratory Data Analysis](/src/02_Exploratory_Data_Analysis.ipynb)
 * [Recommender Engine Unit Tests](/src/03_Recommender_Systems.ipynb)
 * [Recommender Engine Live Demo](/src/04_Live_Demo.ipynb)
 
-**Data products**
-* [Farfetch customer reviews](https://www.farfetch.com/reviews): Pieces Bought, Product URL, Rating, Reviewed By
-* Farfetch product details: Original Price, Discount, Designer, Gender, Made In, Category
+## Data Products
+
+**[Farfetch Customer Reviews](https://www.farfetch.com/reviews)**
+* Pieces Bought
+* Product URL
+* Rating
+* Reviewed By
+
+**[Farfetch Product Details](https://www.farfetch.com/shopping/women/gucci-leather-belt-with-double-g-buckle-item-12132461.aspx)**
+* Original Price
+* Discount
+* Designer
+* Gender
+* Made In
+* Category
 
 ## Source Code
 
@@ -44,7 +63,7 @@ But perhaps we can leverage simple unpersonalized recommender systems to follow 
 
 **[The Farfetch Class](/src/farfetch.py)**
 
-**The project data stack**
+**The Project Data Stack**
 * Business Understanding: Brand Management, Consumer Journeys
 * Programming Languages: Python
 * Data Mining & Cleaning: Selenium Webdriver, Requests, BeautifulSoup / HTML
@@ -54,9 +73,6 @@ But perhaps we can leverage simple unpersonalized recommender systems to follow 
 * Data Visualization: Seaborn, Matplotlib
 
 ## Output Results
-
-**Recommender Schedule**
-![Touch-Driven Recommender Engines](/img/Touch_Driven_Recommender_Engines.png)
 
 **Unpersonalized: The Most-Rated Individual Products (3x recommendations)**
 ![The Most-Rated Individual Products](/img/The_Most_Rated_Individual_Products.png)
