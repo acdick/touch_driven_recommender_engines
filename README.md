@@ -2,7 +2,7 @@ RECOMMENDER SYSTEMS
 # Touch-Driven Recommender Engines
 UNDERSTANDING THE CUSTOMER
 
-[Browse the pitch deck](Farfetch_Understanding_the_Customer.pdf)
+[Browse the pitch deck...](Farfetch_Understanding_the_Customer.pdf)
 
 In the digital age, the internet connects billions of people to countless products around the world, providing consumers with more choices than ever before. In 2016, 185,000 sellers carried over 353 million products in the Amazon Marketplace alone. While savvy choosers may find exactly what they want, many consumers can be paralyzed by the decision-making process.
 
@@ -14,7 +14,7 @@ Personalized recommender systems suffer from the “cold start” problem, in wh
 
 But perhaps we can leverage simple unpersonalized recommender systems to follow the touch points of the consumer journey. We can tackle the cold start problem by recommending popular products to new customers and then progressively switching to more personalized recommendations. So let’s try to implement a touch-driven recommender engine for an e-commerce platform.
 
-[Continue reading the full story in The Startup, a Medium publication](https://medium.com/swlh/touch-driven-recommender-engines-85b6c722a7d9?source=friends_link&sk=436886dcec00e828fffdeb6c23ed56a5)
+[Continue reading the full story curated by The Startup, a Medium publication...](https://medium.com/swlh/touch-driven-recommender-engines-85b6c722a7d9?source=friends_link&sk=436886dcec00e828fffdeb6c23ed56a5)
 
 ## Repository Contents
 
@@ -22,43 +22,27 @@ But perhaps we can leverage simple unpersonalized recommender systems to follow 
 * [Data Products](#data-products)
 * [Source Code](#source-code)
 * [Output Results](#output-results)
+* [Contact Information](#contact-information)
 
 ## Project Features
 BRAND MANAGEMENT | CONSUMER JOURNEYS
 
 ![Touch-Driven Recommender Engines](/img/Touch_Driven_Recommender_Engines.png)
 
-- [x] **Touch-Driven Recommender Engine:**<br>
+- [x] **Touch-Driven Recommender Engine**<br>
 A system that records the touch points for each customer and their responses to adaptive recommendations.
 
-- [x] **Live Checkpoint for Inventory Stockout:**<br>
+- [x] **Live Checkpoint for Inventory Stockout**<br>
 A check that each recommended product is in-stock, querying the status of the product webpage or database.
 
-- [x] **Non-Repeating Rolling Recommendations:**<br>
+- [x] **Non-Repeating Rolling Recommendations**<br>
 A check that each product recommended to the customer is novel based on the recommendation history.
 
-- [ ] **Synchronization with NoSQL Database:**<br>
+- [ ] **Synchronization with NoSQL Database**<br>
 Database feedback of the customer response for each recommendation prior to issuing the next recommendation.
 
 ## Data Products
 SELENIUM | REQUESTS | BEAUTIFULSOUP | HTML
-
-**[Data Gathering](/src/01_Data_Gathering.ipynb)**
-* 100,000 customer reviews
-* 21,641 product ratings
-* 16,105 in-stock product ratings
-* 9,667 unique customers
-* 13,518 unique products
-
-**[Exploratory Data Analysis](/src/02_Exploratory_Data_Analysis.ipynb)**
-* 3 Genders (Women, Men, Kids)
-* 5 Made In Locations
-* 16 Discount Levels
-* 1,184 Designers
-* 29 Categories
-* 374 Subcategories
-* 7,788 Colors
-* 12,596 Styles
 
 **[Farfetch Customer Reviews](https://www.farfetch.com/reviews)**
 * Date
@@ -84,12 +68,38 @@ SELENIUM | REQUESTS | BEAUTIFULSOUP | HTML
 * Color
 * Made In
 
+**[Data Gathering](/src/01_Data_Gathering.ipynb)**
+* 100,000 customer reviews
+* 21,641 product ratings
+* 16,105 in-stock product ratings
+* 9,667 unique customers
+* 13,518 unique products
+
+**[Exploratory Data Analysis](/src/02_Exploratory_Data_Analysis.ipynb)**
+* 3 Genders (Women, Men, Kids)
+* 5 Made In locations
+* 16 Discount levels
+* 1,184 Designers
+* 29 Categories
+* 374 Subcategories
+* 7,788 Colors
+* 12,596 Styles
+
 ## Source Code
 PYTHON | MONGODB | NOSQL | JSON | PICKLE | PANDAS | NUMPY | SURPRISE | SINGULAR VALUE DECOMPOSITION
 
 **[The Farfetch Class](/src/farfetch.py)**
+* Object and database initialization
+* Data gathering and cleaning of customer reviews and product information
+* Feature engineering of product similarity
+* Adaptor wrapping of Recommender class
+* Live demonstration of recommender engine
 
 **[The Recommender Class](/src/recommender.py)**
+* Object and recommender history initialization
+* Unpersonalized recommender
+* Content-based recommender
+* Collaborative filtering recommender
 
 **[Recommender Engine Unit Tests](/src/03_Recommender_Systems.ipynb)**
 * The Most-Rated Individual Products
@@ -102,23 +112,47 @@ PYTHON | MONGODB | NOSQL | JSON | PICKLE | PANDAS | NUMPY | SURPRISE | SINGULAR 
 SEABORN / MATPLOTLIB
 
 **[Recommender Engine Demo](/src/04_Live_Demo.ipynb)**
+1. Instantiate Farfetch object
+2. Load product similarity matrix
+3. Start live demo
+4. Create new user
+5. End live demo
 
-**Unpersonalized: The Most-Rated Individual Products (3x recommendations)**
+**Unpersonalized**
+* The Most-Rated Individual Products
+* 3x Recommendations
+
 ![The Most-Rated Individual Products](/img/The_Most_Rated_Individual_Products.png)
 ![The Most-Rated Individual Products Farfetch](/img/The_Most_Rated_Individual_Products_Farfetch.png)
 
-**Unpersonalized: The "Best One" Most-Rated Subcategory (3x recommendations)**
+**Unpersonalized**
+* The "Best One" Most-Rated Subcategory
+* 3x Recommendations
+
 ![The Best One Most-Rated Subcategory](/img/The_Best_One_Most_Rated_Subcategory.png)
 ![The Best One Most-Rated Subcategory Farfetch](/img/The_Best_One_Most_Rated_Subcategory_Farfetch.png)
 
-**Unpersonalized: The "Best Nine" Most-Rated Subcategories (9x recommendations)**
+**Unpersonalized**
+* The "Best Nine" Most-Rated Subcategories
+* 9x Recommendations
+
 ![The Best Nine Most-Rated Subcategories](/img/The_Best_Nine_Most_Rated_Subcategories.png)
 ![The Best Nine Most-Rated Subcategories Farfetch](/img/The_Best_Nine_Most_Rated_Subcategories_Farfetch.png)
 
-**Content-Based Filtering: Product Similarity via Pearson Correlation (3x recommendations)**
+**Content-Based Filtering**
+* Product Similarity via Pearson Correlation
+* 3x Recommendations
+
 ![Content-Based Similarity: Pearson Correlation](/img/Content_Based_Similarity_Pearson_Correlation.png)
 ![Content-Based Similarity: Pearson Correlation Farfetch](/img/Content_Based_Similarity_Pearson_Correlation_Farfetch.png)
 
-**User-to-User Collaborative Filtering: Matrix Factorization via Singular Value Decomposition (Nx recommendations)**
+**User-to-User Collaborative Filtering**
+* Matrix Factorization via Singular Value Decomposition
+* Unlimited Recommendations
+
 ![Collaborative Filtering: Singular Value Decomposition](/img/Collaborative_Filtering_SVD.png)
 ![Collaborative Filtering: Customer-Product Utility Matrix](/img/Customer_Product_Utility_Matrix.png)
+
+## Contact Information
+
+[Adam C Dick](https://www.linkedin.com/in/adamcdick/)
