@@ -14,9 +14,11 @@ Personalized recommender systems suffer from the “cold start” problem, in wh
 
 But perhaps we can leverage simple unpersonalized recommender systems to follow the touch points of the consumer journey. We can tackle the cold start problem by recommending popular products to new customers and then progressively switching to more personalized recommendations. So let’s try to implement a touch-driven recommender engine for an e-commerce platform.
 
-[Continue reading the full story on The Startup, a Medium publication](https://medium.com/swlh/touch-driven-recommender-engines-85b6c722a7d9?source=friends_link&sk=436886dcec00e828fffdeb6c23ed56a5)
+[Continue reading the full story in The Startup, a Medium publication](https://medium.com/swlh/touch-driven-recommender-engines-85b6c722a7d9?source=friends_link&sk=436886dcec00e828fffdeb6c23ed56a5)
 
-## Project Features
+* [Project Features](#Project-Features)
+
+(## Project Features)
 
 **Consumer journey**
 * Touch-Driven Recommender Engine
@@ -24,7 +26,7 @@ But perhaps we can leverage simple unpersonalized recommender systems to follow 
 * Non-Repeating Rolling Recommendations
 * Synchronization with NoSQL Database
 
-## Data Products
+(## Data Products)
 
 **Explore the repository**
 * [Data Gathering](/src/01_Data_Gathering.ipynb)
@@ -36,7 +38,7 @@ But perhaps we can leverage simple unpersonalized recommender systems to follow 
 * [Farfetch customer reviews](https://www.farfetch.com/reviews): Pieces Bought, Product URL, Rating, Reviewed By
 * Farfetch product details: Original Price, Discount, Designer, Gender, Made In, Category
 
-## Source Code
+[Source](## Source Code)
 
 **[The Recommender Class](/src/recommender.py)**
 
@@ -51,7 +53,7 @@ But perhaps we can leverage simple unpersonalized recommender systems to follow 
 * Predictive Modeling: Surprise / Singular Value Decomposition
 * Data Visualization: Seaborn, Matplotlib
 
-## Output Results
+[Output](## Output Results)
 
 **Recommender Schedule**
 ![Touch-Driven Recommender Engines](/img/Touch_Driven_Recommender_Engines.png)
