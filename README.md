@@ -155,4 +155,5 @@ SEABORN / MATPLOTLIB
 
 ## Contact Information
 
-[Adam C Dick](https://www.linkedin.com/in/adamcdick/)
+**Adam C Dick**
+[LinkedIn](https://www.linkedin.com/in/adamcdick/)
