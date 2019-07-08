@@ -16,9 +16,9 @@ But perhaps we can leverage simple unpersonalized recommender systems to follow 
 
 [Continue reading the full story in The Startup, a Medium publication](https://medium.com/swlh/touch-driven-recommender-engines-85b6c722a7d9?source=friends_link&sk=436886dcec00e828fffdeb6c23ed56a5)
 
-* [Project Features](#Project-Features)
+* [Project Features](## Project Features)
 
-(## Project Features)
+## Project Features
 
 **Consumer journey**
 * Touch-Driven Recommender Engine
