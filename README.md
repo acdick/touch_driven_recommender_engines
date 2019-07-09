@@ -22,7 +22,7 @@ But perhaps we can leverage simple unpersonalized recommender systems to follow 
 * [Data Products](#data-products)
 * [Source Code](#source-code)
 * [Output Results](#output-results)
-* [Contact Information](#contact-information)
+* [Collaboration](#collaboration)
 
 ## Project Features
 ADTECH | DIGITAL MARKETING | BRAND MANAGEMENT | CONSUMER JOURNEYS | RECOMMENDER SYSTEMS
@@ -51,7 +51,7 @@ SELENIUM | REQUESTS | BEAUTIFULSOUP | HTML
 * Product URLs
 * Ordered From
 * Reviewed By
-* Reviewer Comments
+* Review
 
 **[Farfetch Product Details](https://www.farfetch.com/shopping/women/gucci-leather-belt-with-double-g-buckle-item-12132461.aspx)**
 * Product URL
@@ -69,16 +69,16 @@ SELENIUM | REQUESTS | BEAUTIFULSOUP | HTML
 * Made In
 
 **[Data Mining](/src/01_Data_Gathering.ipynb)**
-* 100,000 customer reviews
-* 21,641 product ratings
-* 16,105 in-stock product ratings
-* 9,667 unique customers
-* 13,518 unique products
+* 100,000 Customer Reviews
+* 21,641 Product Ratings
+* 16,105 In-Stock Product Ratings
+* 9,667 Unique Customers
+* 13,518 Unique Products
 
 **[Exploratory Data Analysis](/src/02_Exploratory_Data_Analysis.ipynb)**
 * 3 Genders (Women, Men, Kids)
-* 5 Made In locations
-* 16 Discount levels
+* 5 Made In Locations
+* 16 Discount Levels
 * 1,184 Designers
 * 29 Categories
 * 374 Subcategories
@@ -89,14 +89,14 @@ SELENIUM | REQUESTS | BEAUTIFULSOUP | HTML
 PYTHON | MONGODB | NOSQL | JSON | PICKLE | PANDAS | NUMPY | SURPRISE | SINGULAR VALUE DECOMPOSITION
 
 **[The Farfetch Class](/src/farfetch.py)**
-* Object and database initialization
+* Object and NoSQL MongoDB database initialization
 * Data gathering and cleaning of customer reviews and product information
 * Feature engineering of product similarity
 * Adaptor wrapping of Recommender class
-* Live demonstration of recommender engine
+* Live demonstration of Touch-Driven Recommender Engine
 
 **[The Recommender Class](/src/recommender.py)**
-* Object and history initialization
+* Object and customer history initialization
 * Unpersonalized recommenders
 * Content-based recommender
 * Collaborative filtering recommender
@@ -111,11 +111,11 @@ PYTHON | MONGODB | NOSQL | JSON | PICKLE | PANDAS | NUMPY | SURPRISE | SINGULAR 
 ## Output Results
 SEABORN / MATPLOTLIB
 
-**[Recommender Engine Demo](/src/04_Live_Demo.ipynb)**
+**[Recommender Engine Live Demo](/src/04_Live_Demo.ipynb)**
 1. Instantiate Farfetch object
 2. Load product similarity matrix
 3. Start live demo
-4. Create new user
+4. Create new user, display recommended product webpages and collect customer ratings
 5. End live demo
 
 **Unpersonalized Recommender**
@@ -126,7 +126,7 @@ SEABORN / MATPLOTLIB
 ![The Most-Rated Individual Products Farfetch](/img/The_Most_Rated_Individual_Products_Farfetch.png)
 
 **Unpersonalized Recommender**
-* The "Best One" Most-Rated Subcategory
+* The "Best One" Most-Rated Subcategory: Adidas Shoes
 * 3x Recommendations
 
 ![The Best One Most-Rated Subcategory](/img/The_Best_One_Most_Rated_Subcategory.png)
@@ -134,6 +134,8 @@ SEABORN / MATPLOTLIB
 
 **Unpersonalized Recommender**
 * The "Best Nine" Most-Rated Subcategories
+* Designers: Adidas, Dolce & Gabbana, Gucci
+* Categories: Shoes, Clothing, Bags
 * 9x Recommendations
 
 ![The Best Nine Most-Rated Subcategories](/img/The_Best_Nine_Most_Rated_Subcategories.png)
@@ -149,11 +151,18 @@ SEABORN / MATPLOTLIB
 **User-to-User Collaborative Filtering Recommender**
 * Matrix Factorization via Singular Value Decomposition
 * Unlimited Recommendations
+* 99.988% Customer-Product Matrix Sparsity
 
 ![Collaborative Filtering: Singular Value Decomposition](/img/Collaborative_Filtering_SVD.png)
 ![Collaborative Filtering: Customer-Product Utility Matrix](/img/Customer_Product_Utility_Matrix.png)
 
-## Contact Information
+## Collaboration
 
-**Adam C Dick**
-[LinkedIn](https://www.linkedin.com/in/adamcdick/)
+**Contact:** Adam C Dick
+* [Email](mailto:adam.c.dick@gmail.com)
+* [LinkedIn](https://www.linkedin.com/in/adamcdick/)
+* [Medium](https://medium.com/@adam.c.dick)
+* [Scholar](https://scholar.google.com/citations?user=eMO88ogAAAAJ&hl=en)
+
+**License**
+* [MIT License](https://github.com/acdick/touch_driven_recommender_engines/blob/master/LICENSE)
