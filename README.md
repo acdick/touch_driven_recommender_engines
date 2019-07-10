@@ -166,5 +166,8 @@ SEABORN / MATPLOTLIB
 * [Medium](https://medium.com/@adam.c.dick)
 * [Scholar](https://scholar.google.com/citations?user=eMO88ogAAAAJ&hl=en)
 
+**Acknowledgements**
+* Photos by [Farfetch](https://www.farfetch.com)
+
 **License**
 * [MIT License](https://github.com/acdick/touch_driven_recommender_engines/blob/master/LICENSE)
