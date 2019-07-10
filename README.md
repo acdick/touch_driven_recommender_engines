@@ -103,6 +103,17 @@ PYTHON | MONGODB | NOSQL | JSON | PICKLE | PANDAS | NUMPY | SURPRISE | SINGULAR 
 * 1 Content-Based recommender
 * 1 Collaborative Filtering recommender
 
+**[Content-Based Product Similarity](https://gist.github.com/acdick/fb76dcde98cd622f7756e9af9d54d464)**
+1. Calculate the content-based product similarity matrix
+2. Drop multicollinear columns and columns not considered for similarity
+3. Select continuous and categorical features for correlation
+4. Encode categorical variables with dummy variables
+5. Calculate Pearson correlation matrix
+6. Request a content-based recommendation
+7. Sort all product correlations related to top-rated user product
+8. Drop auto-correlation of top-rated user product
+9. Return the product with the highest correlation
+
 **[Recommender Engine Unit Tests](/src/03_Recommender_Systems.ipynb)**
 * The Most-Rated Individual Products
 * The “Best One” Most-Rated Subcategory
