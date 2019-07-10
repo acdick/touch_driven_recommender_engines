@@ -160,7 +160,7 @@ SEABORN / MATPLOTLIB
 
 ## Contribute
 
-**Contact:**
+**Contact**
 * [Email](mailto:adam.c.dick@gmail.com)
 * [LinkedIn](https://www.linkedin.com/in/adamcdick/)
 * [Medium](https://medium.com/@adam.c.dick)
