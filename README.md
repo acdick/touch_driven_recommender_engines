@@ -29,8 +29,6 @@ ADTECH | DIGITAL MARKETING | BRAND MANAGEMENT | CONSUMER JOURNEYS | RECOMMENDER 
 
 ![Touch-Driven Recommender Engines](/img/Touch_Driven_Recommender_Engines.png)
 
-To deliver our customer-centric recommendation journey in a minimum viable product, we should focus on a limited set of features to implement. We need to record the history of recommendations presented to each customer, check that we recommend products in-stock, ensure that recommendations are not repeated and update our database after each customer touch point:
-
 - [x] **Touch-Driven Recommender Engine**<br>
 A system that records the touch points for each customer and their responses to adaptive recommendations.
 
@@ -138,8 +136,8 @@ SEABORN / MATPLOTLIB
 
 **Unpersonalized Recommender**
 * The "Best Nine" Most-Rated Subcategories
-* Designers: Adidas, Dolce & Gabbana, Gucci
-* Categories: Shoes, Clothing, Bags
+* Top Designers: Adidas, Dolce & Gabbana, Gucci
+* Top Categories: Shoes, Clothing, Bags
 * 9 recommendations
 
 ![The Best Nine Most-Rated Subcategories](/img/The_Best_Nine_Most_Rated_Subcategories.png)
