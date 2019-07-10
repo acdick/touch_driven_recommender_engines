@@ -22,12 +22,14 @@ But perhaps we can leverage simple unpersonalized recommender systems to follow 
 * [Data Products](#data-products)
 * [Source Code](#source-code)
 * [Output Results](#output-results)
-* [Collaboration](#collaboration)
+* [Contribute](#contribute)
 
 ## Project Features
 ADTECH | DIGITAL MARKETING | BRAND MANAGEMENT | CONSUMER JOURNEYS | RECOMMENDER SYSTEMS
 
 ![Touch-Driven Recommender Engines](/img/Touch_Driven_Recommender_Engines.png)
+
+To deliver our customer-centric recommendation journey in a minimum viable product, we should focus on a limited set of features to implement. We need to record the history of recommendations presented to each customer, check that we recommend products in-stock, ensure that recommendations are not repeated and update our database after each customer touch point:
 
 - [x] **Touch-Driven Recommender Engine**<br>
 A system that records the touch points for each customer and their responses to adaptive recommendations.
@@ -42,7 +44,9 @@ A check that each product recommended to the customer is novel based on the reco
 Database feedback of the customer response for each recommendation prior to issuing the next recommendation.
 
 ## Data Products
-SELENIUM | REQUESTS | BEAUTIFULSOUP | HTML
+WEB SCRAPING | SELENIUM | REQUESTS | BEAUTIFULSOUP | HTML | DOCUMENT STORE
+
+[Farfetch](https://www.farfetch.com) is an online luxury retail platform and marketplace, connecting consumers in over 190 countries to more than 3,000 brands. With each brand selling a wide variety of products, Farfetch can be considered a long tail marketplace. The value of the platform is driven by numerous differentiated products that appeal to varied consumers, rather than mass market mega-hits.
 
 **[Farfetch Customer Reviews](https://www.farfetch.com/reviews)**
 * Date
@@ -89,17 +93,17 @@ SELENIUM | REQUESTS | BEAUTIFULSOUP | HTML
 PYTHON | MONGODB | NOSQL | JSON | PICKLE | PANDAS | NUMPY | SURPRISE | SINGULAR VALUE DECOMPOSITION
 
 **[The Farfetch Class](/src/farfetch.py)**
-* Object and NoSQL MongoDB database initialization
+* Initialization of NoSQL MongoDB document-oriented database
 * Data gathering and cleaning of customer reviews and product information
-* Feature engineering of product similarity
+* Feature engineering of content-based product similarity
 * Adaptor wrapping of Recommender class
 * Live demonstration of Touch-Driven Recommender Engine
 
 **[The Recommender Class](/src/recommender.py)**
-* Object and customer history initialization
-* Unpersonalized recommenders
-* Content-based recommender
-* Collaborative filtering recommender
+* Initialization of customer recommendation history
+* 3 Unpersonalized recommenders (most-rated individual products and subcategories)
+* 1 Content-Based recommender
+* 1 Collaborative Filtering recommender
 
 **[Recommender Engine Unit Tests](/src/03_Recommender_Systems.ipynb)**
 * The Most-Rated Individual Products
@@ -120,14 +124,14 @@ SEABORN / MATPLOTLIB
 
 **Unpersonalized Recommender**
 * The Most-Rated Individual Products
-* 3x Recommendations
+* 3 recommendations
 
 ![The Most-Rated Individual Products](/img/The_Most_Rated_Individual_Products.png)
 ![The Most-Rated Individual Products Farfetch](/img/The_Most_Rated_Individual_Products_Farfetch.png)
 
 **Unpersonalized Recommender**
 * The "Best One" Most-Rated Subcategory: Adidas Shoes
-* 3x Recommendations
+* 3 recommendations
 
 ![The Best One Most-Rated Subcategory](/img/The_Best_One_Most_Rated_Subcategory.png)
 ![The Best One Most-Rated Subcategory Farfetch](/img/The_Best_One_Most_Rated_Subcategory_Farfetch.png)
@@ -136,29 +140,29 @@ SEABORN / MATPLOTLIB
 * The "Best Nine" Most-Rated Subcategories
 * Designers: Adidas, Dolce & Gabbana, Gucci
 * Categories: Shoes, Clothing, Bags
-* 9x Recommendations
+* 9 recommendations
 
 ![The Best Nine Most-Rated Subcategories](/img/The_Best_Nine_Most_Rated_Subcategories.png)
 ![The Best Nine Most-Rated Subcategories Farfetch](/img/The_Best_Nine_Most_Rated_Subcategories_Farfetch.png)
 
 **Content-Based Filtering Recommender**
 * Product Similarity via Pearson Correlation
-* 3x Recommendations
+* 3 recommendations
 
 ![Content-Based Similarity: Pearson Correlation](/img/Content_Based_Similarity_Pearson_Correlation.png)
 ![Content-Based Similarity: Pearson Correlation Farfetch](/img/Content_Based_Similarity_Pearson_Correlation_Farfetch.png)
 
 **User-to-User Collaborative Filtering Recommender**
 * Matrix Factorization via Singular Value Decomposition
-* Unlimited Recommendations
+* Unlimited recommendations
 * 99.988% Customer-Product Matrix Sparsity
 
 ![Collaborative Filtering: Singular Value Decomposition](/img/Collaborative_Filtering_SVD.png)
 ![Collaborative Filtering: Customer-Product Utility Matrix](/img/Customer_Product_Utility_Matrix.png)
 
-## Collaboration
+## Contribute
 
-**Contact:** Adam C Dick
+**Contact:**
 * [Email](mailto:adam.c.dick@gmail.com)
 * [LinkedIn](https://www.linkedin.com/in/adamcdick/)
 * [Medium](https://medium.com/@adam.c.dick)
