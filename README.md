@@ -14,7 +14,7 @@ Personalized recommender systems suffer from the “cold start” problem, in wh
 
 But perhaps we can leverage simple unpersonalized recommender systems to follow the touch points of the consumer journey. We can tackle the cold start problem by recommending popular products to new customers and then progressively switching to more personalized recommendations. So let’s try to implement a touch-driven recommender engine for an e-commerce platform.
 
-[Continue reading the full story curated by The Startup, a Medium publication...](https://medium.com/swlh/touch-driven-recommender-engines-85b6c722a7d9?source=friends_link&sk=436886dcec00e828fffdeb6c23ed56a5)
+[Continue reading the full story curated by Towards Data Science, a Medium publication...](https://towardsdatascience.com/touch-driven-recommender-engines-85b6c722a7d9?sk=436886dcec00e828fffdeb6c23ed56a5)
 
 ## Repository Contents
 
